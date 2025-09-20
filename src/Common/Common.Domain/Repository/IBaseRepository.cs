@@ -9,7 +9,7 @@ namespace Common.Domain.Repository
     {
         Task<T?> GetAsync(Guid id);
 
-        Task<T?> GetTracking(long id);
+        Task<T?> GetTracking(Guid id);
 
         Task AddAsync(T entity);
         void Add(T entity);
