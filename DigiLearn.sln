@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36401.2 d17.14
+VisualStudioVersion = 17.14.36401.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
@@ -26,6 +26,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Application", "src\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Infrastucture", "src\Common\Common.Infrastucture\Common.Infrastucture.csproj", "{55744704-692B-4CE3-BF68-1DA6635046A1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ticket", "Ticket", "{58D25A42-67D9-4178-9CC9-50403B03E22D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TIcketModules", "src\Modules\Ticket\TIcket.Module\TIcketModules.csproj", "{67AE1CC9-58A0-456C-8604-E2E6B209BEF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +52,10 @@ Global
 		{55744704-692B-4CE3-BF68-1DA6635046A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55744704-692B-4CE3-BF68-1DA6635046A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55744704-692B-4CE3-BF68-1DA6635046A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67AE1CC9-58A0-456C-8604-E2E6B209BEF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67AE1CC9-58A0-456C-8604-E2E6B209BEF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67AE1CC9-58A0-456C-8604-E2E6B209BEF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67AE1CC9-58A0-456C-8604-E2E6B209BEF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +69,8 @@ Global
 		{49DF2D48-7E37-4F0A-9F10-70BFED38CF08} = {DEE43A5D-5EC8-4123-B321-3A3C232A9CAE}
 		{9A422D22-E0C3-49E3-A299-3D0E378CB465} = {DEE43A5D-5EC8-4123-B321-3A3C232A9CAE}
 		{55744704-692B-4CE3-BF68-1DA6635046A1} = {DEE43A5D-5EC8-4123-B321-3A3C232A9CAE}
+		{58D25A42-67D9-4178-9CC9-50403B03E22D} = {ABFAB972-6549-433D-AA92-D4D3FD40EB99}
+		{67AE1CC9-58A0-456C-8604-E2E6B209BEF6} = {58D25A42-67D9-4178-9CC9-50403B03E22D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A5E055AB-8E23-4E1F-BB83-698DB3C84F05}

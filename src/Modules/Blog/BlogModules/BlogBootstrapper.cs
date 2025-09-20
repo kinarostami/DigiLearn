@@ -14,12 +14,12 @@ public static class BlogBootstrapper
     {
         service.AddDbContext<BlogContext>(optoin =>
         {
-            optoin.UseSqlServer(config.GetConnectionString(""));
+            optoin.UseSqlServer(config.GetConnectionString("Blog_Context"));
         });
         service.AddScoped<ICategoryRepository, CategoryRepository>();
         service.AddScoped<IPostRepository, PostRepository>();
         service.AddScoped<IBlogService, BlogService>();
-        //service.AddAutoMapper(typeof(MapperProfile).Assembly);
+        service.AddAutoMapper(typeof(MapperProfile).Assembly);
         return service;
     }
 }
