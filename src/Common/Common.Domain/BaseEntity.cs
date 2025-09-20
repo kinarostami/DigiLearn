@@ -4,8 +4,8 @@ namespace Common.Domain
 {
     public class BaseEntity
     {
-        public Guid Id { get; protected set; }
-        public DateTime CreationDate { get; private set; }
+        public Guid Id { get;  set; }
+        public DateTime CreationDate { get;  set; }
 
         public BaseEntity()
         {
