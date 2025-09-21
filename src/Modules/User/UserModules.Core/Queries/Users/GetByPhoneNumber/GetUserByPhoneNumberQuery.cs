@@ -2,7 +2,6 @@
 using Common.Query;
 using Microsoft.EntityFrameworkCore;
 using UserModule.Core.Queries._DTOs;
-using UserModule.Data;
 using UserModules.Data;
 
 namespace UserModule.Core.Queries.Users.GetByPhoneNumber;

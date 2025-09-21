@@ -15,7 +15,7 @@ public static class TicketBootstrapper
             optoin.UseSqlServer(config.GetConnectionString("Ticket_Context"));
         });
         service.AddScoped<ITicketService, TicketService>();
-        service.AddAutoMapper(typeof(MapperProfile).Assembly);
+        service.AddAutoMapper(typeof(TicketMapperProfile).Assembly);
         return service;
     }
 }

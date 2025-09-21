@@ -1,13 +1,8 @@
 ﻿using Common.Application;
 using Common.Application.SecurityUtil;
 using Common.Application.Validation.FluentValidations;
-using Common.EventBus.Abstractions;
-using Common.EventBus.Events;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using RabbitMQ.Client;
-using UserModule.Data;
-using UserModule.Data.Entities.Users;
 using UserModules.Data;
 using UserModules.Data.Entities.Users;
 

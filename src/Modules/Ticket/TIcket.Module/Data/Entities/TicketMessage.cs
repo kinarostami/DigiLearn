@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TIcketModules.Data.Entities;
 
-class TicketMessage : BaseEntity
+public class TicketMessage : BaseEntity
 {
     public Guid UserId { get; set; }
     public Guid TicketId { get; set; }

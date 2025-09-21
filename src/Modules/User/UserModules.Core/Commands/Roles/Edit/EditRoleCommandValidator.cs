@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using UserModule.Core.Commands.Roles.Create;
 
 namespace UserModule.Core.Commands.Roles.Edit;
 

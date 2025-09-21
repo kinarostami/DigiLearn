@@ -4,9 +4,9 @@ using TIcketModules.Data.Entities;
 
 namespace TIcketModules;
 
-public class MapperProfile : Profile
+public class TicketMapperProfile : Profile
 {
-    public MapperProfile()
+    public TicketMapperProfile()
     {
         CreateMap<Ticket, CreateTicketCommand>().ReverseMap();
         CreateMap<Ticket, TicketDto>().ReverseMap();

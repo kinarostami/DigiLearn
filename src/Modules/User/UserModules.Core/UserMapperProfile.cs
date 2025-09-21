@@ -4,9 +4,9 @@ using UserModules.Data.Entities.Users;
 
 namespace UserModule.Core;
 
-public class MapperProfile : Profile
+public class UserMapperProfile : Profile
 {
-    public MapperProfile()
+    public UserMapperProfile()
     {
         CreateMap<UserDto, User>().ReverseMap();
     }

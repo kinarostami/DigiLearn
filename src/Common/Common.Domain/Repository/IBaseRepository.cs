@@ -19,11 +19,21 @@ namespace Common.Domain.Repository
         void Update(T entity);
 
         Task<int> Save();
+        void SaveSync();
 
         Task<bool> ExistsAsync(Expression<Func<T, bool>> expression);
 
         bool Exists(Expression<Func<T, bool>> expression);
 
-        T? Get(long id);
+        T? Get(Guid id);
+    }
+
+    public interface IMongoRepository<TEntity> where TEntity : BaseEntity
+    {
+        Task Delete(Guid id);
+        Task<TEntity?> GetById(Guid id);
+        Task Insert(TEntity entity);
+        Task Update(TEntity entity);
+
     }
 }

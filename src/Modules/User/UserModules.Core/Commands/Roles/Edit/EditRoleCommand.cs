@@ -1,5 +1,4 @@
 ﻿using Common.Application;
-using UserModule.Data.Entities._Enums;
 using UserModules.Data.Entities._Enums;
 
 namespace UserModule.Core.Commands.Roles.Edit;

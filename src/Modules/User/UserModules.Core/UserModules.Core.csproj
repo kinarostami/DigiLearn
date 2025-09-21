@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
     <ProjectReference Include="..\..\..\Common\Common.Query\Common.Query.csproj" />
+    <ProjectReference Include="..\..\Blog\BlogModules\BlogModules.csproj" />
     <ProjectReference Include="..\UserModules.Data\UserModules.Data.csproj" />
   </ItemGroup>
 

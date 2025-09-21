@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TIcketModules.Data.Entities;
 
-class Ticket : BaseEntity
+public class Ticket : BaseEntity
 {
     public Guid UserId { get; set; }
     [MaxLength(100)]

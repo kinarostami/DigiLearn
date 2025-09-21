@@ -1,7 +1,5 @@
 ﻿using Common.Application;
 using Microsoft.EntityFrameworkCore;
-using UserModule.Data;
-using UserModule.Data.Entities.Roles;
 using UserModules.Data;
 
 namespace UserModule.Core.Commands.Roles.Delete;

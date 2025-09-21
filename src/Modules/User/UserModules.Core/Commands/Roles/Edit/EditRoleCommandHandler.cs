@@ -1,8 +1,5 @@
 ﻿using Common.Application;
 using Microsoft.EntityFrameworkCore;
-using UserModule.Core.Commands.Roles.Create;
-using UserModule.Data;
-using UserModule.Data.Entities.Roles;
 using UserModules.Data;
 using UserModules.Data.Entities.Roles;
 
