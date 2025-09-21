@@ -23,7 +23,9 @@ var services = builder.Services;
 builder.Services.AddScoped<ILocalFileService, LocalFileService>();
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services
+    .AddRazorPages()
+    .AddRazorRuntimeCompilation();
 builder.Services
     .InitUsertModule(builder.Configuration);
 
