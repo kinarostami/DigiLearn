@@ -1,4 +1,5 @@
-﻿using UserModule.Core.Services;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using UserModule.Core.Services;
 
 namespace DigiLearn.Web.Infrastructure.JwtUtil;
 
@@ -11,8 +12,8 @@ public class CustomJwtValidation
         _userFacade = facade;
     }
 
-    //public async Task Validate(TokenValidatedContext context)
-    //{
+    public async Task Validate(TokenValidatedContext context)
+    {
         //var userId = context.Principal.GetUserId();
         //var jwtToken = context.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
         //var token = await _userFacade.GetUserTokenByJwtToken(jwtToken);
@@ -28,5 +29,5 @@ public class CustomJwtValidation
         //    context.Fail("User InActive");
         //    return;
         //}
-    //}
+    }
 }

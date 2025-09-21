@@ -1,5 +1,6 @@
 using Common.Application.FileUtil.Interfaces;
 using Common.Application.FileUtil.Services;
+using DigiLearn.Web.Infrastructure.JwtUtil;
 using TIcketModules;
 using UserModule.Core.Queries._DTOs;
 using UserModule.Core.Services;
@@ -18,12 +19,16 @@ builder.Services.AddMediatR(cfg =>
     );
 });
 
+var services = builder.Services;
 builder.Services.AddScoped<ILocalFileService, LocalFileService>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services
     .InitUsertModule(builder.Configuration);
+
+services.AddJwtAuthentication(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,11 +39,22 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.Use(async (context, next) =>
+{
+    var token = context.Request.Cookies["Token"]?.ToString();
+    if (string.IsNullOrWhiteSpace(token) == false)
+    {
+        context.Request.Headers.Append("Authorization", $"Bearer {token}");
+    }
+    await next();
+});
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
