@@ -24,6 +24,7 @@
 
 
 	<ItemGroup>
+    <ProjectReference Include="..\..\Modules\Ticket\TIcket.Module\TIcketModules.csproj" />
     <ProjectReference Include="..\..\Modules\User\UserModules.Core\UserModules.Core.csproj" />
   </ItemGroup>
 

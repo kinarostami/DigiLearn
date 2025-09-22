@@ -22,6 +22,7 @@ public interface ITicketService
     Task<OperationResult> CloseTicket(Guid ticketId);
 
     Task<TicketDto> GetTicket(Guid ticketId);
+    Task<TicketFilterReulst> GetTicketsByFilter(TicketFilterParams filterParams);
 }
 class TicketService : ITicketService
 {
@@ -63,6 +64,30 @@ class TicketService : ITicketService
             .FirstOrDefaultAsync(x => x.Id == ticketId);
         
        return _mapper.Map<TicketDto>(ticket);
+    }
+
+    public async Task<TicketFilterReulst> GetTicketsByFilter(TicketFilterParams filterParams)
+    {
+        var result =  _ticketContext.Tickets.AsQueryable();
+
+        if(filterParams != null)
+            result = result.Where(x => x.UserId == filterParams.UserId);
+
+        var skip = (filterParams.PageId - 1) * filterParams.Take;
+        var data = new TicketFilterReulst()
+        {
+            Data = await result.Skip(skip).Take(filterParams.Take)
+            .Select(x => new TicketFilterData()
+            {
+                Id = x.Id,
+                UserId = x.UserId,
+                CreationDate = x.CreationDate,
+                TicketStatus = x.TicketStatus,
+                Title = x.Title
+            }).ToListAsync()
+        };
+        data.GeneratePaging(result,filterParams.Take,filterParams.Take);
+        return data;
     }
 
     public async Task<OperationResult> SendMessageInTicket(SendTicketMessageCommand command)

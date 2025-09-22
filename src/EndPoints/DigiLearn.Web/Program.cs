@@ -27,7 +27,8 @@ builder.Services
     .AddRazorPages()
     .AddRazorRuntimeCompilation();
 builder.Services
-    .InitUsertModule(builder.Configuration);
+    .InitUsertModule(builder.Configuration)
+    .InitTicketModule(builder.Configuration);
 
 services.AddJwtAuthentication(builder.Configuration);
 
