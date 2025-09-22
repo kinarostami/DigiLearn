@@ -84,7 +84,7 @@
                                                     @item.CreationDate.ToPersianDate()
                                                 </td>
                                                 <td>
-                                                    <a asp-page="Show" asp-route-id="@item.Id" class="btn btn-sm btn-primary">نمایش</a>
+                                                    <a asp-page="Show" asp-route-ticketId="@item.Id" class="btn btn-sm btn-primary">نمایش</a>
                                                 </td>
                                             </tr>
                                             cuntter += 1;
@@ -99,15 +99,7 @@
                     </table>
                 </div>
                 <hr class="mt-0">
-                <div class="paginat col-12">
-                    <a href="#" class="first">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a class="current-page">4</a>
-                    <a href="#">5</a>
-
-                    <a href="#" class="last">22</a>
-                </div>
+                <partial name="Shared/_Pagination" model="Model.FilterReulst"/>
             </div>
         </div>
 

@@ -21,7 +21,7 @@ public interface ITicketService
     Task<OperationResult> SendMessageInTicket(SendTicketMessageCommand command);
     Task<OperationResult> CloseTicket(Guid ticketId);
 
-    Task<TicketDto> GetTicket(Guid ticketId);
+    Task<TicketDto?> GetTicket(Guid ticketId);
     Task<TicketFilterReulst> GetTicketsByFilter(TicketFilterParams filterParams);
 }
 class TicketService : ITicketService
@@ -57,7 +57,7 @@ class TicketService : ITicketService
         return OperationResult<Guid>.Success(ticket.Id);
     }
 
-    public async Task<TicketDto> GetTicket(Guid ticketId)
+    public async Task<TicketDto?> GetTicket(Guid ticketId)
     {
         var ticket = await _ticketContext.Tickets
             .Include(x => x.Messages)
@@ -95,6 +95,9 @@ class TicketService : ITicketService
         var ticket = await _ticketContext.Tickets.FirstOrDefaultAsync(x => x.Id == command.TicketId);
         if (ticket == null)
             return OperationResult.NotFound();
+        
+        if (string.IsNullOrWhiteSpace(ticket.Text))
+            return OperationResult.Error("متن تیکت را وارد کنید");
 
         var ticketMessage = new TicketMessage()
         {
