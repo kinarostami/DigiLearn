@@ -55,7 +55,7 @@ namespace DigiLearn.Web.Pages.Auth
             var token = JwtTokenBuilder.BuildToken(user, _configuration);
             if (IsRemeberMe)
             {
-                HttpContext.Response.Cookies.Append("Token", token, new CookieOptions()
+                HttpContext.Response.Cookies.Append("digi-token", token, new CookieOptions()
                 {
                     HttpOnly = true,
                     Expires = DateTime.Now.AddDays(15),
@@ -64,7 +64,7 @@ namespace DigiLearn.Web.Pages.Auth
             }
             else
             {
-                HttpContext.Response.Cookies.Append("Token", token, new CookieOptions()
+                HttpContext.Response.Cookies.Append("digi-token", token, new CookieOptions()
                 {
                     HttpOnly = true,
                     Secure = true
