@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Course\Edit\" />
+    <Folder Include="Course\Create\" />
+    <Folder Include="Course\Episodes\Accept\" />
+    <Folder Include="Course\Episodes\Delete\" />
+    <Folder Include="Course\Episodes\Edit\" />
+    <Folder Include="Course\Episodes\Add\" />
+    <Folder Include="Course\Sections\EditSection\" />
+    <Folder Include="Course\Sections\DeleteSection\" />
+    <Folder Include="Course\Sections\AddSection\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\CoreModule.Domain\CoreModule.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
