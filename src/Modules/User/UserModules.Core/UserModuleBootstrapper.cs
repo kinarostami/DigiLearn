@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UserModule.Core;
 using UserModule.Core.Services;
+using UserModules.Core.Services;
 using UserModules.Data;
 
 namespace TIcketModules;
@@ -22,6 +23,7 @@ public static class UserModuleBootstrapper
 
         service.AddScoped<IUserFacade, UserFacade>();
         service.AddScoped<IRoleFacade, RoleFacade>();
+        service.AddScoped<INotificationFacade, NotificationFacade>();
 
         service.AddAutoMapper(typeof(UserModuleBootstrapper).Assembly);
         //service.AddValidatorsFromAssembly(typeof(UserModuleBootstrapper).Assembly);

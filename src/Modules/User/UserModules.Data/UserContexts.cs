@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using UserModules.Data.Entities.Notifications;
 using UserModules.Data.Entities.Roles;
 using UserModules.Data.Entities.Users;
 
@@ -20,6 +21,7 @@ public class UserContexts : DbContext
     public DbSet<Role> Roles { get; set; }
     public DbSet<UserRole> UserRoles { get; set; }
     public DbSet<RolePermission> RolePermissions { get; set; }
+    public DbSet<UserNotification> Notifications { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

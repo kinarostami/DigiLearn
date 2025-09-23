@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserModules.Data;
 
@@ -11,9 +12,11 @@ using UserModules.Data;
 namespace UserModules.Data.Migrations
 {
     [DbContext(typeof(UserContexts))]
-    partial class UserContextsModelSnapshot : ModelSnapshot
+    [Migration("20250922182041_init-notification")]
+    partial class initnotification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

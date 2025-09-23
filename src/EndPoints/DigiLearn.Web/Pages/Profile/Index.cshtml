@@ -1,4 +1,5 @@
 ﻿@page
+@using DigiLearn.Web.Infrastructure.Utils
 @model DigiLearn.Web.Pages.Profile.IndexModel
 @{
     ViewData["title"] = "پنل کاربری";
@@ -58,30 +59,31 @@
                             آخرین پیغام
                         </p>
                         <div class="notification-body p-1">
-                            <!-- <div class="item pb-3">
-                                <p>سلام امروز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پرداخت کنید</p>
-                                <span class="pull-left">1399/5/6</span>
+                                @if (Model.NewNotification.Any())
+                                {
+                                    @foreach (var item in Model.NewNotification)
+                                    {
+                                        <div class="item pb-3">
+                                            <h6>@item.Title</h6>
+                                            <hr/>
+                                            <p>@Html.Raw(item.Text)</p>
+                                            <span class="pull-left">@item.CreationDate.ToPersianDateTime()</span>
+                                        </div>
+
+                                    }
+                                    <a asp-page="Notifications" class="btn btn-info btn-block">نمایش همه</a>
+                                }
+                                else
+                                {
+                                    <div class="no-item text-center">
+                                        <p>
+                                            <i class="fa fa-info text-info"></i>
+                                            موردی برای نمایش وجود ندارد
+                                        </p>
+                                    </div>
+                                }
+
                             </div>
-                            <div class="item pb-3">
-                                <p>سلام امروز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پرداخت کنید</p>
-                                <span class="pull-left">1399/5/6</span>
-                            </div>
-                            <div class="item pb-3">
-                                <p>سلام امروز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پرداخت کنید</p>
-                                <span class="pull-left">1399/5/6</span>
-                            </div>
-                            <div class="item pb-3">
-                                <p>سلام امروز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پوز باید قسط اول را پرداخت کنید</p>
-                                <span class="pull-left">1399/5/6</span>
-                            </div>
-                            <a class="btn btn-info btn-block">نمایش همه</a> -->
-                            <div class="no-item text-center">
-                                <p>
-                                    <i class="fa fa-info text-info"></i>
-                                    موردی برای نمایش وجود ندارد
-                                </p>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="col-12 mt-4">

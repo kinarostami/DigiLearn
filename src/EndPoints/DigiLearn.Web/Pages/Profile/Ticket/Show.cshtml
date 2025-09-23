@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                             </div>  
-                            @foreach (var item in Model.Ticket.Messages.OrderByDescending(x => x.CreationDate))
+                            @foreach (var item in Model.Ticket.Messages.OrderBy(x => x.CreationDate))
                             {
                                 <div class="chat">
                                     @if (item.UserId == User.GetUserId())
