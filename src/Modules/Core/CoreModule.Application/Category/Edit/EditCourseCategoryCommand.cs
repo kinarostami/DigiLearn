@@ -18,10 +18,10 @@ public class EditCourseCategoryCommand : IBaseCommand
 }
 public class EditCourseCategoryCommandHandler : IBaseCommandHandler<EditCourseCategoryCommand>
 {
-    private readonly ICategoryRepository _categoryRepository;
+    private readonly ICourseCategoryRepository _categoryRepository;
     private readonly ICategoryDomainService _categoryDomainService;
 
-    public EditCourseCategoryCommandHandler(ICategoryRepository categoryRepository, ICategoryDomainService categoryDomainService)
+    public EditCourseCategoryCommandHandler(ICourseCategoryRepository categoryRepository, ICategoryDomainService categoryDomainService)
     {
         _categoryRepository = categoryRepository;
         _categoryDomainService = categoryDomainService;

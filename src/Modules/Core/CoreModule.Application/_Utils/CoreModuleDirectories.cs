@@ -9,4 +9,6 @@ namespace CoreModule.Application._Utils;
 public class CoreModuleDirectories
 {
     public static string CvFileName = "wwwroor/core/teacher";
+    public static string CourseImage = "wwwroor/core/course";
+    public static string CourseDemoVideo(Guid courseId) => $"wwwroor/core/course/{courseId}";
 }

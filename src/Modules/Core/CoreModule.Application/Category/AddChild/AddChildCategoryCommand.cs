@@ -19,10 +19,10 @@ public class AddChildCategoryCommand : IBaseCommand
 }
 public class AddChildCategoryCommandHandler : IBaseCommandHandler<AddChildCategoryCommand>
 {
-    private readonly ICategoryRepository _categoryRepository;
+    private readonly ICourseCategoryRepository _categoryRepository;
     private readonly ICategoryDomainService _categoryDomainService;
 
-    public AddChildCategoryCommandHandler(ICategoryRepository categoryRepository, ICategoryDomainService categoryDomainService)
+    public AddChildCategoryCommandHandler(ICourseCategoryRepository categoryRepository, ICategoryDomainService categoryDomainService)
     {
         _categoryRepository = categoryRepository;
         _categoryDomainService = categoryDomainService;

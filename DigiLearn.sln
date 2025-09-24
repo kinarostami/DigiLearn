@@ -50,6 +50,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreModule.Query", "src\Mod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreModule.Infrastucture", "src\Modules\Core\CoreModule.Infrastucture\CoreModule.Infrastucture.csproj", "{119FA8E8-A571-477B-A578-610253BB39C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreModule.Facade", "srs\Modules\Core\CoreMoude.Facade\CoreModule.Facade.csproj", "{3A562625-7B70-426F-8A4E-AF48B0F1F4FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreModule.Config", "src\Modules\Core\CoreModule.Config\CoreModule.Config.csproj", "{D54D5929-0012-4A36-82F3-2B71D9C90F1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,6 +112,14 @@ Global
 		{119FA8E8-A571-477B-A578-610253BB39C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{119FA8E8-A571-477B-A578-610253BB39C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{119FA8E8-A571-477B-A578-610253BB39C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A562625-7B70-426F-8A4E-AF48B0F1F4FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A562625-7B70-426F-8A4E-AF48B0F1F4FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A562625-7B70-426F-8A4E-AF48B0F1F4FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A562625-7B70-426F-8A4E-AF48B0F1F4FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D54D5929-0012-4A36-82F3-2B71D9C90F1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D54D5929-0012-4A36-82F3-2B71D9C90F1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D54D5929-0012-4A36-82F3-2B71D9C90F1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D54D5929-0012-4A36-82F3-2B71D9C90F1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -133,6 +145,8 @@ Global
 		{E4849935-58D4-4460-8BF4-6D77252DC771} = {240CB332-BC4B-4957-98C9-AB760F332A7E}
 		{97A53B1A-AEFB-4BF4-9AB6-22EE1081FEAE} = {240CB332-BC4B-4957-98C9-AB760F332A7E}
 		{119FA8E8-A571-477B-A578-610253BB39C1} = {240CB332-BC4B-4957-98C9-AB760F332A7E}
+		{3A562625-7B70-426F-8A4E-AF48B0F1F4FA} = {240CB332-BC4B-4957-98C9-AB760F332A7E}
+		{D54D5929-0012-4A36-82F3-2B71D9C90F1C} = {240CB332-BC4B-4957-98C9-AB760F332A7E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A5E055AB-8E23-4E1F-BB83-698DB3C84F05}

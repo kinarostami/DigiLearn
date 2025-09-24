@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CoreModule.Domain.Category.Repository
 {
-    public interface ICategoryRepository : IBaseRepository<CourseCategory>
+    public interface ICourseCategoryRepository : IBaseRepository<CourseCategory>
     {
         Task Delete(CourseCategory category);
     }

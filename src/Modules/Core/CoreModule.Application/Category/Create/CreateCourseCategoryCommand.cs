@@ -18,10 +18,10 @@ public class CreateCourseCategoryCommand : IBaseCommand
 }
 public class CreateCourseCategoryCommandHandler : IBaseCommandHandler<CreateCourseCategoryCommand>
 {
-    private readonly ICategoryRepository _categoryRepository;
+    private readonly ICourseCategoryRepository _categoryRepository;
     private readonly ICategoryDomainService _categoryDomainService;
 
-    public CreateCourseCategoryCommandHandler(ICategoryRepository categoryRepository, ICategoryDomainService categoryDomainService)
+    public CreateCourseCategoryCommandHandler(ICourseCategoryRepository categoryRepository, ICategoryDomainService categoryDomainService)
     {
         _categoryRepository = categoryRepository;
         _categoryDomainService = categoryDomainService;
