@@ -2,43 +2,17 @@
 @using DigiLearn.Web.Infrastructure.Utils
 @using TIcketModules.Data.Entities
 @model DigiLearn.Web.Pages.Profile.Ticket.IndexModel
-@section meta {
-    <link rel="stylesheet" href="/css/profile.min.css" />
-}
 @{
+    ViewData["title"] = "تیکت ها";
+    Layout = "Shared/_ProfileLayout";
     var cuntter = 1;
 }
-<main>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 breadcrumb">
-                <ul class="">
-                    <li>
-                        <a href="/">
-                            خانه
-                            <i class="fa fa-chevron-left"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-page="profile/index">
-                            پنل کاربری
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-page="profile/ticket/index">
-                            تیکت ها
-                        </a>
-                    </li>
-                </ul>
 
-            </div>
-            <partial name="Shared/_ProfileSideBar" />
-<div class="col-12 col-xl-9 col-lg-9 col-md-8 profile-body">
     <div class="row ">
         <div class="col-12 info shadow pl-0 pr-0">
             <p class="title">
                 <i class="fa fa-paper-plane"></i>
-                تیکت ها
+            @ViewData["title"]
             </p>
 
             <br>
@@ -104,8 +78,3 @@
         </div>
 
     </div>
-</div>
-
-    </div>
-</div>
-</main>

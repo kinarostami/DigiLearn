@@ -12,6 +12,10 @@ namespace CoreModule.Domain.Category.Models;
 
 public class CourseCategory : AggregateRoot
 {
+    private CourseCategory()
+    {
+        
+    }
     public CourseCategory(string title, string slug, Guid? parentId, ICategoryDomainService categoryDomainService)
     {
         Guard(title, slug);

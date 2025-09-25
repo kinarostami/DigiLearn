@@ -6,6 +6,8 @@ using CoreModule.Infrastucture.Persistent.Category;
 using CoreModule.Infrastucture.Persistent.Course;
 using CoreModule.Infrastucture.Persistent.Teacher;
 using CoreModule.Query._Data;
+using CoreModule.Query.Teacher.GetById;
+using CoreModule.Query.Teacher.GetByUserId;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +25,7 @@ public class CoreModuleQueryBootstrapper
     public static void RegisterDependency(IServiceCollection services, IConfiguration configuration)
     {
         services.AddMediatR(typeof(QueryContext));
+        services.AddMediatR(typeof(GetByUserIdTeacherQuery));
 
         services.AddDbContext<QueryContext>(option =>
         {

@@ -23,7 +23,7 @@ public class UserQueryModel : BaseEntity
     public string PhoneNumber { get; set; }
 
     [MaxLength(110)]
-    public string Email { get; set; }
+    public string? Email { get; set; }
 
     [MaxLength(110)]
     public string Avatar { get; set; }

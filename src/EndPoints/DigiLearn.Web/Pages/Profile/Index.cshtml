@@ -3,31 +3,8 @@
 @model DigiLearn.Web.Pages.Profile.IndexModel
 @{
     ViewData["title"] = "پنل کاربری";
+    Layout = "Shared/_ProfileLayout";
 }
-@section meta {
-    <link rel="stylesheet" href="/css/profile.min.css" />
-}
-<main>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12 breadcrumb">
-            <ul class="">
-                <li>
-                    <a href="/">
-                        خانه
-                        <i class="fa fa-chevron-left"></i>
-                    </a>
-                </li>
-                <li>
-                    <a asp-page="profile/index">
-                        پنل کاربری
-                    </a>
-                </li>
-            </ul>
-
-        </div>
-        <partial name="Shared/_ProfileSideBar"/>
-        <div class="col-12 col-xl-9 col-lg-9 col-md-8 profile-body">
             <div class="row ">
                 <div class="col-12 col-lg-6 col-xl-6 ">
                     <div class="info custom-shadow">
@@ -133,7 +110,3 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-</main>

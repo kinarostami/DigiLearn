@@ -19,7 +19,7 @@ public static class UserModuleBootstrapper
         {
             optoin.UseSqlServer(config.GetConnectionString("User_Contexts"));
         });
-        //service.AddMediatR(typeof(UserModuleBootstrapper).Assembly);
+        service.AddMediatR(typeof(UserModuleBootstrapper).Assembly);
 
         service.AddScoped<IUserFacade, UserFacade>();
         service.AddScoped<IRoleFacade, RoleFacade>();

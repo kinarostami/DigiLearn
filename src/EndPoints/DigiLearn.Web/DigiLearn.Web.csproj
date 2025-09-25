@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9">
@@ -24,6 +25,7 @@
 
 
 	<ItemGroup>
+    <ProjectReference Include="..\..\Modules\Core\CoreModule.Config\CoreModule.Config.csproj" />
     <ProjectReference Include="..\..\Modules\Ticket\TIcket.Module\TIcketModules.csproj" />
     <ProjectReference Include="..\..\Modules\User\UserModules.Core\UserModules.Core.csproj" />
   </ItemGroup>

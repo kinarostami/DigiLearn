@@ -2,42 +2,9 @@
 @model DigiLearn.Web.Pages.Profile.Ticket.AddModel
 @{
     ViewData["title"] = "افزودن اطلاعات تیکت";
+    Layout = "Shared/_ProfileLayout";
 }
-@section meta {
-    <link rel="stylesheet" href="/css/profile.min.css" />
-}
-<main>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 breadcrumb">
-                <ul class="">
-                    <li>
-                        <a href="/">
-                            خانه
-                            <i class="fa fa-chevron-left"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-page="profile/index">
-                            پنل کاربری
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-page="profile/ticket">
-                            تیکت ها
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-page="profile/ticket/add">
-                            @ViewData["title"]
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-            <partial name="Shared/_ProfileSideBar" />
-            <div class="col-12 col-xl-9 col-lg-9 col-md-8 profile-body">
-                <div class="row ">
+<div class="row ">
                     <div class="col-12 info shadow pl-0 pr-0">
                         <p class="title">
                             <i class="fa fa-address-card-o"></i>
@@ -59,10 +26,3 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</main>
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
