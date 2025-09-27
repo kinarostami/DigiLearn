@@ -24,12 +24,13 @@ public class CreateCourseCommand : IBaseCommand
     public Guid SubCategoryId { get;  set; }
     public string Title { get;  set; }
     public string Description { get; set; }
-    public IFormFile ImageFile { get; set; }
+    public IFormFile ImageFile { get; set; }    
     public string Slug { get; set; }
     public IFormFile? VideoFileName { get; set; }
     public int Price { get; set; }
     public SeoData SeoData { get; set; }
     public CourseLevel CourseLevel { get; set; }
+    public CourseActionStatus Status { get; set; }
 }
 public class CreateCourseCommandHandler : IBaseCommandHandler<CreateCourseCommand>
 {
@@ -64,7 +65,7 @@ public class CreateCourseCommandHandler : IBaseCommandHandler<CreateCourseComman
 
         var course = new Domain.Course.Models.Course(request.TeacherId, request.Title, request.Description,
             imageName, videoPath, request.Price, request.SeoData, request.CourseLevel,
-            request.CategoryId, request.SubCategoryId, request.Slug, _courseDomainService)
+            request.CategoryId, request.SubCategoryId, request.Slug, _courseDomainService,request.Status)
         {
             Id = courseId
         };

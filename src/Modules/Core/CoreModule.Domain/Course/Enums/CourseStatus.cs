@@ -16,5 +16,11 @@ public enum CourseLevel
 {
     Beginner,
     Intermediate,
-    Expect
+    Expert
+}
+public enum CourseActionStatus
+{
+    Pending,
+    Active,
+    DeActive
 }

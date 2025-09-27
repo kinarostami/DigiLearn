@@ -3,6 +3,9 @@ using CoreModule.Application.Category.AddChild;
 using CoreModule.Application.Category.Create;
 using CoreModule.Application.Category.Delete;
 using CoreModule.Application.Category.Edit;
+using CoreModule.Query.Category._DTOs;
+using CoreModule.Query.Category.GetAll;
+using CoreModule.Query.Category.GetChildren;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,6 +22,9 @@ public interface ICourseCategoryFacade
     Task<OperationResult> Edit(EditCourseCategoryCommand command);
     Task<OperationResult> Delete(DeleteCourseCategoryCommand command);
     Task<OperationResult> AddChild(AddChildCategoryCommand command);
+
+    Task<List<CourseCategoryDto>> GetAll();
+    Task<List<CourseCategoryChild>> GetCategoryChild(Guid parentId);
 }
 public class CourseCategoryFacade : ICourseCategoryFacade
 {
@@ -47,5 +53,15 @@ public class CourseCategoryFacade : ICourseCategoryFacade
     public async Task<OperationResult> Edit(EditCourseCategoryCommand command)
     {
         return await _mediator.Send(command);
+    }
+
+    public async Task<List<CourseCategoryDto>> GetAll()
+    {
+        return await _mediator.Send(new GetAllCourseCategoryQuery());
+    }
+
+    public async Task<List<CourseCategoryChild>> GetCategoryChild(Guid parentId)
+    {
+        return await _mediator.Send(new GetCourseCategoryChildrenQuery(parentId));
     }
 }

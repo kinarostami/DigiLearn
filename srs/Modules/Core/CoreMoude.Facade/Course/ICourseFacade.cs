@@ -3,6 +3,10 @@ using CoreModule.Application.Category.Create;
 using CoreModule.Application.Category.Edit;
 using CoreModule.Application.Course.Create;
 using CoreModule.Application.Course.Edit;
+using CoreModule.Query.Course._DTOs;
+using CoreModule.Query.Course.GetByFilter;
+using CoreModule.Query.Course.GetById;
+using CoreModule.Query.Course.GetBySlug;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -16,6 +20,10 @@ public interface ICourseFacade
 {
     Task<OperationResult> Create(CreateCourseCommand command);
     Task<OperationResult> Edit(EditCourseCommand command);
+
+    Task<CourseFilterResult> GetCourseFilter(CourseFilterParams param);
+    Task<CourseDto?> GetCourseById(Guid id);
+    Task<CourseDto?> GetCourseBySlug(string slug);
 }
 public class CourseFacade : ICourseFacade
 {
@@ -34,5 +42,20 @@ public class CourseFacade : ICourseFacade
     public async Task<OperationResult> Edit(EditCourseCommand command)
     {
         return await _mediator.Send(command);
+    }
+
+    public async Task<CourseDto?> GetCourseById(Guid id)
+    {
+        return await _mediator.Send(new GetCourseByIdQuery(id));
+    }
+
+    public async Task<CourseDto?> GetCourseBySlug(string slug)
+    {
+        return await _mediator.Send(new GetCourseBySlugQuery(slug));
+    }
+
+    public async Task<CourseFilterResult> GetCourseFilter(CourseFilterParams param)
+    {
+        return await _mediator.Send(new GetCoursesByFilterQuery(param));
     }
 }

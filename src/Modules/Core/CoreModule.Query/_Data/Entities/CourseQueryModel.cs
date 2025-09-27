@@ -21,6 +21,7 @@ public class CourseQueryModel : BaseEntity
     public SeoData SeoData { get;  set; }
     public CourseLevel CourseLevel { get;  set; }
     public CourseStatus CourseStatus { get;  set; }
+    public CourseActionStatus Status { get;  set; }
 
     public List<SectionQueryModel> Sections { get;  set; }
 

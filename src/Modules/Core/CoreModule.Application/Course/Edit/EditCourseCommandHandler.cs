@@ -32,6 +32,7 @@ public class EditCourseCommand : IBaseCommand
     public SeoData SeoData { get; set; }
     public CourseLevel CourseLevel { get; set; }
     public CourseStatus Status { get; set; }
+    public CourseActionStatus ActionStatus { get; set; }
 }
 public class EditCourseCommandHandler : IBaseCommandHandler<EditCourseCommand>
 {
@@ -77,7 +78,7 @@ public class EditCourseCommandHandler : IBaseCommandHandler<EditCourseCommand>
 
         course.Edit(request.Title,request.Description,imageName,videoPath,request.Price
             ,request.SeoData,request.CourseLevel,request.Status,
-            request.CategoryId,request.SubCategoryId,request.Slug,_courseDomainService);
+            request.CategoryId,request.SubCategoryId,request.Slug,request.ActionStatus,_courseDomainService);
 
         await _courseRepository.Save();
 

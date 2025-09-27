@@ -30,4 +30,9 @@
     <ProjectReference Include="..\..\Modules\User\UserModules.Core\UserModules.Core.csproj" />
   </ItemGroup>
 
+
+	<ItemGroup>
+	  <Folder Include="Pages\Profile\Teacher\Courses\Section\" />
+	</ItemGroup>
+
 </Project>

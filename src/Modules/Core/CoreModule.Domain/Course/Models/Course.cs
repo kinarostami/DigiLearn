@@ -19,11 +19,11 @@ public class Course : AggregateRoot
     {
         
     }
-    public Course(Guid teacherId, string title, string description, string imageName, string? videoName, 
-        int price, SeoData seoData, CourseLevel courseLevel, Guid categoryId, 
-        Guid subCategoryId, string slug, ICourseDomainService courseDomainService)
+    public Course(Guid teacherId, string title, string description, string imageName, string? videoName,
+        int price, SeoData seoData, CourseLevel courseLevel, Guid categoryId,
+        Guid subCategoryId, string slug, ICourseDomainService courseDomainService, CourseActionStatus status)
     {
-        Guard(title, description, imageName,slug);
+        Guard(title, description, imageName, slug);
 
         if (courseDomainService.SlugIsExist(slug))
             throw new InvalidDomainDataException("Slug is Exist");
@@ -41,6 +41,7 @@ public class Course : AggregateRoot
         CategoryId = categoryId;
         SubCategoryId = subCategoryId;
         Slug = slug;
+        Status = status;
         Sections = new();
     }
 
@@ -57,12 +58,13 @@ public class Course : AggregateRoot
     public SeoData SeoData { get; private set; }
     public CourseLevel CourseLevel { get; private set; }
     public CourseStatus CourseStatus { get; private set; }
+    public CourseActionStatus Status { get;  set; }
 
     public List<Section> Sections { get; private set; }
 
     public void Edit(string title, string description, string imageName, string? videoName,
         int price, SeoData seoData, CourseLevel courseLevel,CourseStatus courseStatus, Guid categoryId,
-        Guid subCategoryId, string slug, ICourseDomainService courseDomainService)
+        Guid subCategoryId, string slug,CourseActionStatus status, ICourseDomainService courseDomainService)
     {
         Guard(title, description, imageName, slug);
         if(slug != Slug)
@@ -81,6 +83,7 @@ public class Course : AggregateRoot
         CategoryId = categoryId;
         SubCategoryId = subCategoryId;
         Slug = slug;
+        Status = status;
     }
 
 
