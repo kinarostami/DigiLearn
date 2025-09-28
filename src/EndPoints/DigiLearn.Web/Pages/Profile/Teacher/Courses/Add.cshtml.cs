@@ -53,7 +53,7 @@ public class AddModel : BaseRazor
     public string Slug { get; set; }
 
     [Display(Name = "ویدیو معرفی دوره")]
-    [FileType("mp4")]
+    [FileType("mp4",ErrorMessage = "ویدیو نامعتبر است")]
     public IFormFile? VideoFileName { get; set; }
 
     [Display(Name = "قیمت(رایگان=0)")]
@@ -63,7 +63,6 @@ public class AddModel : BaseRazor
     [Display(Name = "سطح دوره")]
     [Required(ErrorMessage = "{0} را وارد کنید")]
     public CourseLevel CourseLevel { get; set; }
-    public SeoData SeoData { get; set; }
 
     public void OnGet()
     {
@@ -84,7 +83,7 @@ public class AddModel : BaseRazor
             VideoFileName = VideoFileName,
             Price = Price,
             CourseLevel = CourseLevel,
-            SeoData = new SeoData(Title,Title,Title,false,null,null)
+            SeoData = new SeoData(Title, Title, Title, null)
         });
 
         return RedirectAndShowAlert(result, RedirectToPage("Index"));

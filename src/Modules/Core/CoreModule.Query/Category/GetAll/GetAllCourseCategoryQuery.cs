@@ -24,7 +24,7 @@ public class GetAllCourseCategoryQueryHandler : IQueryHandler<GetAllCourseCatego
 
     public async Task<List<CourseCategoryDto>> Handle(GetAllCourseCategoryQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Categories
+        return await _context.CourseCategories
             .Where(x => x.ParentId == null)
             .OrderByDescending(x => x.CreationDate)
             .Select(x => new CourseCategoryDto()

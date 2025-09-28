@@ -13,7 +13,7 @@ public class CategoryConfig : IEntityTypeConfiguration<CourseCategory>
 {
     public void Configure(EntityTypeBuilder<CourseCategory> builder)
     {
-        builder.ToTable("Cateogries");
+        builder.ToTable("Categories");
         builder.HasIndex(x => x.Slug).IsUnique();
 
         builder.Property(x => x.Slug)

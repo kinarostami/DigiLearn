@@ -59,8 +59,8 @@ public class CreateCourseCommandHandler : IBaseCommandHandler<CreateCourseComman
             {
                 return OperationResult.Error("فایل ورودی باید ویدیو باشه");
             }
-             videoPath = await _fileService.SaveFileAndGenerateName
-                (request.VideoFileName,CoreModuleDirectories.CourseDemoVideo(courseId));
+             //videoPath = await _fileService.SaveFileAndGenerateName
+             //   (request.VideoFileName,CoreModuleDirectories.CourseDemoVideo(courseId));
         }
 
         var course = new Domain.Course.Models.Course(request.TeacherId, request.Title, request.Description,

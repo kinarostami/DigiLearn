@@ -6,7 +6,7 @@ namespace CoreModule.Domain.Course.Models;
 
 public class Episode : BaseEntity
 {
-    public Episode(string title, Guid token, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive, Guid sectionId, string englishTitle)
+    public Episode(string title, Guid token, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive, Guid sectionId, string englishTitle, bool isFree)
     {
         Guard(title, videoName, englishTitle);
         Title = title;
@@ -17,6 +17,7 @@ public class Episode : BaseEntity
         IsActive = isActive;
         SectionId = sectionId;
         EnglishTitle = englishTitle;
+        IsFree = isFree;
     }
     public Guid SectionId { get; private set; }
     public string Title { get; private set; }
@@ -26,6 +27,7 @@ public class Episode : BaseEntity
     public string VideoName { get; private set; }
     public string? AttachmentName { get; private set; }
     public bool IsActive { get; set; }
+    public bool IsFree { get; private set; }
 
     public void ToggleStatus()
     {

@@ -7,7 +7,6 @@
     ViewData["Title"] = "افزودن دوره";
     Layout = "Shared/_ProfileLayout";
     var categories = await _categoryFacade.GetAll();
-    // var childCategory = await _categoryFacade.GetCategoryChild(P);
 }
 <div class="row ">
     <div class="col-12 info shadow pl-0 pr-0">
@@ -44,9 +43,9 @@
                 </select>
             </div>
             <div class="col-md-6">
-                 <label asp-for="SubCategoryId"></label>
+                <label asp-for="SubCategoryId"></label>
                 <select asp-for="SubCategoryId" class="form-control">
-                 </select>
+                </select>
             </div>
             <div class="col-md-12">
                 @Html.EditorFor(x => x.Description)
@@ -65,16 +64,18 @@
 
     </div>
 </div>
-@section Scripts{
+@section Scripts
+{
     <script>
-        $("#CategoryId").change(function(){
+        $("#CategoryId").change(function () {
             var id = $(this).val();
             $.ajax({
-                url = "/ajax/GetCategoryChildren?id=" + id,
-                method = "get"
-            }).done(function(data){
-                $("#SubCategoryId").html(data)
+                url: "/ajax/getCategoryChildren?id=" + id,
+                method: "get"
+            }).done(function (data) {
+                $("#SubCategoryId").html(data);
             });
         });
     </script>
 }
+

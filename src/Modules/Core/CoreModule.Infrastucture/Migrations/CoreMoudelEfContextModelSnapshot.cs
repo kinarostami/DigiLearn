@@ -50,7 +50,7 @@ namespace CoreModule.Infrastucture.Migrations
                     b.HasIndex("Slug")
                         .IsUnique();
 
-                    b.ToTable("Cateogries", "dbo");
+                    b.ToTable("Categories", "dbo");
                 });
 
             modelBuilder.Entity("CoreModule.Domain.Course.Models.Course", b =>
@@ -89,6 +89,9 @@ namespace CoreModule.Infrastucture.Migrations
                     b.Property<string>("Slug")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("SubCategoryId")
                         .HasColumnType("uniqueidentifier");
@@ -280,6 +283,9 @@ namespace CoreModule.Infrastucture.Migrations
                                         .HasColumnType("varchar(100)");
 
                                     b2.Property<bool>("IsActive")
+                                        .HasColumnType("bit");
+
+                                    b2.Property<bool>("IsFree")
                                         .HasColumnType("bit");
 
                                     b2.Property<TimeSpan>("TimeSpan")

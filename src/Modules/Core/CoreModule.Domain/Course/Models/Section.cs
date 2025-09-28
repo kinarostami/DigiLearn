@@ -25,8 +25,8 @@ public class Section : BaseEntity
         DisplayOrder = disblayOrder;
     }
 
-    public void AddEpisode(string title, Guid token, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive,string englishTitle)
+    public void AddEpisode(string title, Guid token, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive,string englishTitle,bool isFree)
     {
-       Episodes = Episodes.Append(new Episode(title, token, timeSpan, videoName, attachmentName, isActive, Id,englishTitle));
+       Episodes = Episodes.Append(new Episode(title, token, timeSpan, videoName, attachmentName, isActive, Id,englishTitle,isFree));
     }
 }

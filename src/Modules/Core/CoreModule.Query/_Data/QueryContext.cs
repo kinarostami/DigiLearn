@@ -19,7 +19,7 @@ public class QueryContext : DbContext
     public DbSet<CourseQueryModel> Courses { get; set; }
     public DbSet<SectionQueryModel> Sections { get; set; }
     public DbSet<EpisodeQueryModel> Episodes { get; set; }
-    public DbSet<CategoryQueryModel> Categories { get; set; }
+    public DbSet<CategoryQueryModel> CourseCategories { get; set; }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
@@ -43,6 +43,7 @@ public class QueryContext : DbContext
                 .IsUnicode(false)
                 .HasMaxLength(20);
         });
+
         modelBuilder.Entity<CourseQueryModel>(builder =>
         {
             builder.OwnsOne(b => b.SeoData, config =>

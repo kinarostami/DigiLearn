@@ -1,4 +1,5 @@
 ﻿@page
+@using Common.Application
 @using CoreModule.Application._Utils
 @using CoreModule.Domain.Course.Enums
 @using DigiLearn.Web.Infrastructure.Utils
@@ -40,7 +41,7 @@
                                     <img src="@CoreModuleDirectories.GetCourseImage(item.ImageName)" style="max-width: 200px" />
                                 </td>
                                 <td>@item.Title</td>
-                                <td>@item.Price.ToString("#,0")</td>
+                                <td>@item.Price.TooMan(true)</td>
                                 <td>
                                     @switch (item.CourseStatus)
                                     {

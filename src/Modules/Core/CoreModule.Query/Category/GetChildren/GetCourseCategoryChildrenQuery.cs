@@ -23,7 +23,7 @@ public class GetCourseCategoryChildrenQueryHandler : IQueryHandler<GetCourseCate
 
     public async Task<List<CourseCategoryChild>> Handle(GetCourseCategoryChildrenQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Categories
+        return await _context.CourseCategories
             .Where(x => x.ParentId == request.ParentId)
             .OrderByDescending(x => x.CreationDate)
             .Select(x => new CourseCategoryChild()
