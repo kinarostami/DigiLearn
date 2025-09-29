@@ -1,0 +1,48 @@
+﻿@page
+@model DigiLearn.Web.Areas.Admin.Pages.Courses.Categories.IndexModel
+@{
+    ViewData["title"] = "مدیریت دسته بندی ها";
+    ViewData["selected"] = "courses_categories";
+}
+ <h3>@ViewData["title"]</h3>
+ <a asp-page="Add" class="btn btn-success mb-2">افزودن مورد جدید</a>
+ <div class="table-responsive card-body p-0">
+     <table class="table table-bordered table-hover">
+         <thead>
+             <tr>
+                 <th>عنوان</th>
+                 <th>Slug</th>
+                 <th>عملیات</th>
+             </tr>
+         </thead>
+         <tbody>
+             @foreach (var item in Model.Categories)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Slug</td>
+                    <td>
+                        <a asp-page="AddChild" class="btn btn-sm btn-primary" asp-route-parentId="@item.Id">افزودن زیر دسته بندی</a>
+                        <a asp-page="Edit" class="btn btn-sm btn-primary" asp-route-id="@item.Id">ویرایش</a>
+                        <delete-item url="@Url.Page("Index","Delete",new {item.ParentId})">حذف</delete-item>
+                    </td>
+                </tr>
+                @if(item.Children.Any())
+                {
+                    @foreach (var child in item.Children)
+                    {
+                        <tr style="opacity: .8;color: #4b96dd">
+                            <td class="pl-5">@child.Title</td>
+                            <td class="pl-5">@child.Slug</td>
+                            <td>
+                                <a asp-page="Edit" class="btn btn-sm btn-primary" asp-route-id="@child.Id">ویرایش</a>
+                                <delete-item url="@Url.Page("Index", "Delete", new { item.ParentId })">حذف</delete-item>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+         </tbody>
+     </table>
+     @* <partial name="_Pagination" model="null"/> *@
+ </div>

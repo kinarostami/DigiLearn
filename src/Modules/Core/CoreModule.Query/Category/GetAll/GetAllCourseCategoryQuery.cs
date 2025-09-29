@@ -24,7 +24,8 @@ public class GetAllCourseCategoryQueryHandler : IQueryHandler<GetAllCourseCatego
 
     public async Task<List<CourseCategoryDto>> Handle(GetAllCourseCategoryQuery request, CancellationToken cancellationToken)
     {
-        return await _context.CourseCategories
+        var model = await _context.CourseCategories
+            .Include(x => x.Childs)
             .Where(x => x.ParentId == null)
             .OrderByDescending(x => x.CreationDate)
             .Select(x => new CourseCategoryDto()
@@ -34,6 +35,16 @@ public class GetAllCourseCategoryQueryHandler : IQueryHandler<GetAllCourseCatego
                Slug = x.Slug,
                CreationDate = x.CreationDate,
                Title = x.Title,
-            }).ToListAsync();
+               Children = x.Childs.Select(c => new CourseCategoryChild()
+               {
+                   CreationDate = c.CreationDate,
+                   Id = c.Id,
+                   ParentId = c.ParentId,
+                   Title = c.Title,
+                   Slug = c.Slug,
+               }).ToList()
+            }).ToListAsync(cancellationToken);
+
+        return model;
     }
 }

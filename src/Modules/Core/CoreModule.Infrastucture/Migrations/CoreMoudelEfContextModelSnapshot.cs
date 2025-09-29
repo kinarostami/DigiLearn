@@ -47,6 +47,8 @@ namespace CoreModule.Infrastucture.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ParentId");
+
                     b.HasIndex("Slug")
                         .IsUnique();
 
@@ -189,6 +191,14 @@ namespace CoreModule.Infrastucture.Migrations
                     b.ToTable("Users", "dbo");
                 });
 
+            modelBuilder.Entity("CoreModule.Domain.Category.Models.CourseCategory", b =>
+                {
+                    b.HasOne("CoreModule.Domain.Category.Models.CourseCategory", null)
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("CoreModule.Domain.Course.Models.Course", b =>
                 {
                     b.OwnsOne("Common.Domain.ValueObjects.SeoData", "SeoData", b1 =>
@@ -200,9 +210,6 @@ namespace CoreModule.Infrastucture.Migrations
                                 .HasMaxLength(500)
                                 .HasColumnType("nvarchar(500)")
                                 .HasColumnName("Canonical");
-
-                            b1.Property<bool>("IndexPage")
-                                .HasColumnType("bit");
 
                             b1.Property<string>("MetaDescription")
                                 .HasMaxLength(500)
@@ -218,9 +225,6 @@ namespace CoreModule.Infrastucture.Migrations
                                 .HasMaxLength(500)
                                 .HasColumnType("nvarchar(500)")
                                 .HasColumnName("MetaTitle");
-
-                            b1.Property<string>("Schema")
-                                .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("CourseId");
 

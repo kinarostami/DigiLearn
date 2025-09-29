@@ -1,0 +1,19 @@
+﻿@page
+@model DigiLearn.Web.Areas.Admin.Pages.Courses.Categories.AddModel
+@{
+    ViewData["title"] = "افزودن دسته بندی";
+    ViewData["selected"] = "courses_categories";
+}
+<form method="post" class="card" enctype="multipart/form-data">
+        <div class="row card-body">
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.Title);
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.Slug);
+            </div>
+        </div>
+        <div class="card-footer text-left">
+            <button class="btn btn-success" type="submit">ثبت اطلاعات</button>
+        </div>
+</form>

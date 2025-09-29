@@ -8,10 +8,10 @@ namespace CoreModule.Application._Utils;
 
 public class CoreModuleDirectories
 {
-    public static string CvFileName = "wwwroor/core/teacher";
-    public static string CourseImage = "wwwroor/core/course";
-    public static string CourseDemoVideo(Guid courseId) => $"wwwroor/core/course/{courseId}";
-    public static string CourseEpisode(Guid courseId,Guid episodeToken) => $"wwwroor/core/course/{courseId}/episodes/{episodeToken}";
+    public static string CvFileName = "wwwroot/core/teacher";
+    public static string CourseImage = "wwwroot/core/course";
+    public static string CourseDemoVideo(Guid courseId) => $"wwwroot/core/course/{courseId}";
+    public static string CourseEpisode(Guid courseId,Guid episodeToken) => $"wwwroot/core/course/{courseId}/episodes/{episodeToken}";
 
     public static string GetCourseImage(string imageName) => $"{CourseImage.Replace("wwwroot", "")}/{imageName}";
 }
