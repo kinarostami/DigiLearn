@@ -17,7 +17,7 @@ public class Section : BaseEntity
     public string Title { get;private set; }
     public int DisplayOrder { get;private set; }
 
-    public IEnumerable<Episode> Episodes { get; private set; }
+    public List<Episode> Episodes { get; private set; }
 
     public void Edit(string title,int disblayOrder)
     {
@@ -25,8 +25,10 @@ public class Section : BaseEntity
         DisplayOrder = disblayOrder;
     }
 
-    public void AddEpisode(string title, Guid token, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive,string englishTitle,bool isFree)
+    public Episode AddEpisode(string title, Guid token, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive,string englishTitle,bool isFree)
     {
-       Episodes = Episodes.Append(new Episode(title, token, timeSpan, videoName, attachmentName, isActive, Id,englishTitle,isFree));
+        var episode = new Episode(title, token, timeSpan, videoName, attachmentName, isActive, Id, englishTitle, isFree);
+        Episodes.Add(episode);
+        return episode;
     }
 }

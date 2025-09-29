@@ -11,8 +11,7 @@
             <i class="fa fa-paper-plane"></i>
             @ViewData["Title"]
         </p>
-        <br>
-        <div class="info-body p-2">
+        <div class="info-body">
             <div id="accordion">
                 @foreach (var item in Model.Course.Sections.OrderBy(x => x.DisplayOrder))
                 {
@@ -25,9 +24,54 @@
                             </h5>
                         </div>
 
-                        <div id="a_@item.Id" class="collapse show" aria-labelledby="a   _@item.Id" data-parent="#accordion">
+                        <div id="a_@item.Id" class="collapse show" aria-labelledby="a_@item.Id" data-parent="#accordion">
                             <div class="card-body">
-                                hi my name is kina im from iran my job is buusinnes men
+                                <a asp-page="Episodes/Add" asp-route-courseId="@Model.Course.Id"
+                                asp-route-sectionId="@item.Id" class="btn btn-save mr-2 mb-4 float-right">ثبت قسمت جدید</a>
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <td>عنوان</td>
+                                            <td>زمان</td>
+                                            <td>وضعیت</td>
+                                            <td>عملیات</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var countier = 1;
+                                        }
+                                        @foreach (var episode in item.Episodes)
+                                        {
+                                            <tr>
+                                                <th>@countier</th>
+                                                <th>@episode.Title</th>
+                                                <th>@episode.TimeSpan</th>
+                                                <th>
+                                                    @if (episode.IsActive)
+                                                    {
+                                                        <label>فعال</label>
+                                                    }
+                                                    else
+                                                    {
+                                                        <label>غیر فعال</label>
+                                                    }
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                             countier += 1;
+                                        }
+                                        @if (Model.Course.Sections.Count == 0)
+                                        {
+                                            <tr>
+                                                <td colspan="5">موردی برای نمایش وجود ندارد</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
                     </div>

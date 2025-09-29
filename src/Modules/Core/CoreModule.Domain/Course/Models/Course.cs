@@ -113,7 +113,7 @@ public class Course : AggregateRoot
         Sections.Remove(section);
     }
 
-    public void AddEpisode(Guid sectionId,string title, Guid token, TimeSpan timeSpan, string videoExtension, string? attachmentExtension, bool isActive,string engilshTitle,bool isFree)
+    public Episode AddEpisode(Guid sectionId,string title, Guid token, TimeSpan timeSpan, string videoExtension, string? attachmentExtension, bool isActive,string engilshTitle,bool isFree)
     {
         
         var section = Sections.FirstOrDefault(x => x.Id == sectionId);
@@ -137,7 +137,7 @@ public class Course : AggregateRoot
                 CourseStatus = CourseStatus.InProgress;
             }
         }
-        section.AddEpisode(title, token,timeSpan,vidName,attName,isActive,engilshTitle,isFree);
+        return section.AddEpisode(title, token,timeSpan,vidName,attName,isActive,engilshTitle,isFree);
     }
 
     public void AcceptEpisode(Guid episodeId)
