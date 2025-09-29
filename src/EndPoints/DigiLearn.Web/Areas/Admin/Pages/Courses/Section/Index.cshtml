@@ -1,0 +1,70 @@
+﻿@page "{courseId}/{handler?}"
+@model DigiLearn.Web.Areas.Admin.Pages.Courses.Section.IndexModel
+@{
+    ViewData["title"] = "مدیریت سر فصل های دوره " + Model.Course.Title;
+    ViewData["selected"] = "courses_index";
+}
+ <h3>@ViewData["title"]</h3>
+ <a asp-page="Add" class="btn btn-success mb-2">افزودن مورد جدید</a>
+<div class="collapsible">
+    @foreach (var item in Model.Course.Sections)
+        {
+        <div class="card collapse-header">
+            <div id="c_@item.Id" class="card-header" data-toggle="collapse" role="button" data-target="#r_@item.Id" aria-controls="r_@item.Id" aria-expanded="false">
+                <span class="collapse-title">
+                    @item.Title
+                </span>
+            </div>
+            <div id="r_@item.Id" role="tabpanel" aria-labelledby="c_@item.Id" class="collapse">
+                <table class="table table-bordered mb-0">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <td>عنوان</td>
+                                    <td>زمان</td>
+                                    <td>وضعیت</td>
+                                    <td>عملیات</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var countier = 1;
+                                }
+                                @foreach (var episode in item.Episodes)
+                                {
+                                    <tr>
+                                        <th>@countier</th>
+                                        <th>@episode.Title</th>
+                                        <th>@episode.TimeSpan</th>
+                                        <th>
+                                            @if (episode.IsActive)
+                                            {
+                                                <label class="badge badge-success">فعال</label>
+                                            }
+                                            else
+                                            {
+                                                 <label class="badge badge-danger">غیر فعال</label>
+                                            }
+                                        </th>
+                                        <th>
+                                          @if (episode.IsActive == false)
+                                        {
+                                            <Question url="@Url.Page("Index", "Accept", new { courseId = item.CourseId, episodeId = episode.Id })" class="btn btn-success btn-sm">تایید</Question>
+                                        }
+                                    <delete-item url="@Url.Page("Index", "Delete", new { courseId = item.CourseId, episodeId = episode.Id })">حذف</delete-item>
+                                        </th>
+                                    </tr>
+                                    countier += 1;
+                                }
+                                @if (Model.Course.Sections.Count == 0)
+                                {
+                                    <tr>
+                                        <td colspan="5">موردی برای نمایش وجود ندارد</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+        }
+</div>

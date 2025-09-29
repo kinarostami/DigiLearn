@@ -10,5 +10,6 @@ namespace CoreModule.Domain.Course.Repository
 {
     public interface ICourseRepository : IBaseRepository<Models.Course>
     {
+       
     }
 }

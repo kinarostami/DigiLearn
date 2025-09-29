@@ -24,18 +24,18 @@
             </li>
 
             <li class=" nav-item">
-                <a href="/admin/courses/categories">
+                <a href="javascript:void(0)">
                     <i class="menu-livicon" data-icon="Dashboard"></i>
                     <span class="menu-title" data-i18n="Dashboard">مدیریت دوره ها</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="">
+                    <li class="nav-item @(selected == "courses_index" ? "active" : null)">
                         <a href="/admin/courses">
                             <i class="bx bx-left-arrow-alt"></i>
                             <span class="menu-item" data-i18n="eCommerce">دوره ها</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="nav-item @(selected == "courses_categories" ? "active" : null)">
                         <a href="/admin/courses/categories">
                             <i class="bx bx-left-arrow-alt"></i>
                             <span class="menu-item" data-i18n="Analytics">دسته بندی ها</span>

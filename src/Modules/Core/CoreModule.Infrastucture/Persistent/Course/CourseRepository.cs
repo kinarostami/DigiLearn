@@ -8,4 +8,5 @@ public class CourseRepository : BaseRepository<Domain.Course.Models.Course, Core
     public CourseRepository(CoreMoudelEfContext context) : base(context)
     {
     }
+
 }

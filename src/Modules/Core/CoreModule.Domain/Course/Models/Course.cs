@@ -140,6 +140,7 @@ public class Course : AggregateRoot
         return section.AddEpisode(title, token,timeSpan,vidName,attName,isActive,engilshTitle,isFree);
     }
 
+
     public void AcceptEpisode(Guid episodeId)
     {
         var section = Sections.FirstOrDefault(x => x.Episodes.Any(f => f.Id == episodeId && f.IsActive == false));
@@ -150,6 +151,18 @@ public class Course : AggregateRoot
 
         episode.ToggleStatus();
         LastUpdate = DateTime.Now;
+    }
+
+    public Episode DeleteEpisode(Guid episodeId)
+    {
+        var section = Sections.FirstOrDefault(f => f.Episodes.Any(e => e.Id == episodeId));
+        if (section == null)
+            throw new InvalidDomainDataException();
+
+        var episode = section.Episodes.First(f => f.Id == episodeId);
+
+        section.Episodes.Remove(episode);
+        return episode;
     }
 
     void Guard(string title,string description,string imageName,string slug)
