@@ -25,8 +25,27 @@ public class CourseCategoryRepository : BaseRepository<CourseCategory, CoreMoude
         {
             throw new Exception("این دسته بندی دارای چندیدن دوره است");
         }
-        //todod shoulde remove childs
+
+        var children = await Context.Categories.Where(x => x.ParentId == category.Id).ToListAsync();
+        if (children.Any())
+        {
+            foreach (var child in children)
+            {
+                var isAnyCourse = await Context.Courses
+                .AnyAsync(x => x.Id == category.Id || x.SubCategoryId == category.Id);
+                if (isAnyCourse)
+                {
+                    throw new Exception("این دسته بندی دارای چندیدن دوره است");
+                }
+                else
+                {
+                    Context.Remove(child);
+                }
+            }
+        }
+
         Context.Remove(category);
         await Context.SaveChangesAsync();
+        
     }
 }

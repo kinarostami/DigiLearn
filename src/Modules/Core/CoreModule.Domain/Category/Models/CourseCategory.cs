@@ -23,7 +23,7 @@ public class CourseCategory : AggregateRoot
             throw new InvalidDomainDataException("Slug is Exist");
 
         Title = title;
-        Slug = slug;
+        Slug = slug.ToSlug();
         ParentId = parentId;
     }
 
@@ -40,7 +40,7 @@ public class CourseCategory : AggregateRoot
                 throw new InvalidDomainDataException("Slug is Exist");
 
         Title = title;
-        Slug = slug;
+        Slug = slug.ToSlug();
     }
 
     void Guard(string title,string slug)

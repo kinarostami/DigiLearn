@@ -1,4 +1,5 @@
 using CoreModue.Facade.Category;
+using CoreModule.Application.Category.Delete;
 using CoreModule.Domain.Category.Models;
 using CoreModule.Query.Category._DTOs;
 using DigiLearn.Web.Infrastructure.RazorUtils;
@@ -22,6 +23,13 @@ namespace DigiLearn.Web.Areas.Admin.Pages.Courses.Categories
         public async Task OnGet()
         {
             Categories = await _courseCategoryFacade.GetAll();
+        }
+        public async Task<IActionResult> OnPostDelete(Guid id)
+        {
+            return await AjaxTryCatch(() =>
+            {
+               return _courseCategoryFacade.Delete(new DeleteCourseCategoryCommand(id));
+            });
         }
     }
 }

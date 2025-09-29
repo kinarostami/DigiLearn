@@ -1,5 +1,6 @@
 ﻿using Common.Domain.Utils;
 using CoreModue.Facade.Category;
+using CoreModule.Application.Category.AddChild;
 using CoreModule.Application.Category.Create;
 using DigiLearn.Web.Infrastructure.RazorUtils;
 using Microsoft.AspNetCore.Mvc;
@@ -29,15 +30,29 @@ namespace DigiLearn.Web.Areas.Admin.Pages.Courses.Categories
         {
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost([FromQuery] Guid? parentId)
         {
-            var result = await _courseCategoryFacade.Create(new CreateCourseCategoryCommand()
+            if (parentId != null)
             {
-                Title = Title,
-                Slug = Slug.ToSlug()
-            });
+                var result = await _courseCategoryFacade.AddChild(new AddChildCategoryCommand()
+                {
+                    Title = Title,
+                    Slug = Slug.ToSlug(),
+                    ParentCategoryId = (Guid)parentId
+                });
 
-            return RedirectAndShowAlert(result, RedirectToPage("Index"));
+                return RedirectAndShowAlert(result, RedirectToPage("Index"));
+            }
+            else
+            {
+                var result = await _courseCategoryFacade.Create(new CreateCourseCategoryCommand()
+                {
+                    Title = Title,
+                    Slug = Slug.ToSlug()
+                });
+
+                return RedirectAndShowAlert(result, RedirectToPage("Index"));
+            }
         }
     }
 }

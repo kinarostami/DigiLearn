@@ -5,6 +5,7 @@ using CoreModule.Application.Category.Delete;
 using CoreModule.Application.Category.Edit;
 using CoreModule.Query.Category._DTOs;
 using CoreModule.Query.Category.GetAll;
+using CoreModule.Query.Category.GetById;
 using CoreModule.Query.Category.GetChildren;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,7 @@ public interface ICourseCategoryFacade
 
     Task<List<CourseCategoryDto>> GetAll();
     Task<List<CourseCategoryChild>> GetCategoryChild(Guid parentId);
+    Task<CourseCategoryDto?> GetCategoryById(Guid id);
 }
 public class CourseCategoryFacade : ICourseCategoryFacade
 {
@@ -58,6 +60,11 @@ public class CourseCategoryFacade : ICourseCategoryFacade
     public async Task<List<CourseCategoryDto>> GetAll()
     {
         return await _mediator.Send(new GetAllCourseCategoryQuery());
+    }
+
+    public async Task<CourseCategoryDto?> GetCategoryById(Guid id)
+    {
+        return await _mediator.Send(new GetCourseCategoryById(id));
     }
 
     public async Task<List<CourseCategoryChild>> GetCategoryChild(Guid parentId)
