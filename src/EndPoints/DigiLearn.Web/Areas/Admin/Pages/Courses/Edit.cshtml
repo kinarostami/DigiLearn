@@ -1,0 +1,97 @@
+﻿@page "{courseId}"
+@using CoreModue.Facade.Category
+@using CoreModule.Domain.Course.Enums
+@model DigiLearn.Web.Areas.Admin.Pages.Courses.EditModel
+@inject ICourseCategoryFacade _categoryFacade
+@{
+    ViewData["Title"] = "ویرایش دوره";
+    ViewData["selected"] = "courses_index";
+    var categories = await _categoryFacade.GetAll();
+}
+<div class="card">
+<form method="post" class="card" enctype="multipart/form-data">
+        <div class="row card-body">
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.Title);
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.Slug);
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.Price);
+            </div>
+            <div class="col-md-6">
+                <label asp-for="ActionStatus"></label>
+                <select asp-for="ActionStatus" class="form-control">
+                    <option value="@CourseActionStatus.Active">فعال</option>
+                    <option value="@CourseActionStatus.DeActive">غیر فعال</option>
+                    <option value="@CourseActionStatus.Pending">درحال بررسی</option>
+                </select>
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(x => x.Description);
+            </div>
+            <div class="col-md-6">
+                <label asp-for="CategoryId"></label>
+                <select asp-for="CategoryId" class="form-control">
+                    <option>انتخاب کنید</option>
+                    @foreach (var item in categories)
+                    {
+                        <option value="@item.Id">@item.Title</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="SubCategoryId"></label>
+                <select asp-for="SubCategoryId" class="form-control">
+                    @foreach (var item in categories.First(x => x.Id == Model.CategoryId).Children)
+                    {
+                        <option value="@item.Id">@item.Title</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="CourseLevel"></label>
+                <select asp-for="CourseLevel" class="form-control">
+                    <option value="@CourseLevel.Beginner">مقدماتی</option>
+                    <option value="@CourseLevel.Intermediate">از مقدماتی تا پیشرفته</option>
+                    <option value="@CourseLevel.Expert">پیشرفته</option>
+                </select>
+            </div>  
+            <div class="col-md-6">
+                <label asp-for="Status"></label>
+                <select asp-for="Status" class="form-control">
+                    <option value="@CourseStatus.StartSoon">شروع به زودی</option>
+                    <option value="@CourseStatus.Completed">تمام شده</option>
+                    <option value="@CourseStatus.InProgress">درحال برگزاری</option>
+                </select>
+            </div>  
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.ImageFile);
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.VideoFileName);
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(x => x.SeoData);
+            </div>
+        </div>
+        <div class="card-footer text-left">
+            <button class="btn btn-success" type="submit">ویرایش اطلاعات</button>
+        </div>
+</form>
+</div>
+@section Scripts
+{
+    <script>
+        $("#CategoryId").change(function () {
+            var id = $(this).val();
+            $.ajax({
+                url: "/ajax/getCategoryChildren?id=" + id,
+                method: "get"
+            }).done(function (data) {
+                $("#SubCategoryId").html(data);
+            });
+        });
+    </script>
+}

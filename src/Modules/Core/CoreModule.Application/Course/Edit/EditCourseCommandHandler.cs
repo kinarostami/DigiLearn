@@ -38,14 +38,12 @@ public class EditCourseCommandHandler : IBaseCommandHandler<EditCourseCommand>
 {
     private readonly ICourseRepository _courseRepository;
     private readonly ICourseDomainService _courseDomainService;
-    private readonly IFtpFileService _ftpFileService;
     private readonly ILocalFileService _localFileService;
 
-    public EditCourseCommandHandler(ICourseRepository courseRepository, ICourseDomainService courseDomainService, IFtpFileService ftpFileService, ILocalFileService localFileService)
+    public EditCourseCommandHandler(ICourseRepository courseRepository, ICourseDomainService courseDomainService, ILocalFileService localFileService)
     {
         _courseRepository = courseRepository;
         _courseDomainService = courseDomainService;
-        _ftpFileService = ftpFileService;
         _localFileService = localFileService;
     }
 
@@ -66,7 +64,7 @@ public class EditCourseCommandHandler : IBaseCommandHandler<EditCourseCommand>
             {
                 return OperationResult.Error("فایل ورودی باید ویدیو باشه");
             }
-            videoPath = await _ftpFileService.SaveFileAndGenerateName
+            videoPath = await _localFileService.SaveFileAndGenerateName
                (request.VideoFileName, CoreModuleDirectories.CourseDemoVideo(course.Id));
         }
 

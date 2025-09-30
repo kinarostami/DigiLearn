@@ -15,10 +15,10 @@ public class SeoDataViewModel
     public string? Canonical { get; set; }
 
 
-    //public SeoData Map()
-    //{
-    //    return new SeoData(MetaKeyWords, MetaDescription, MetaTitle, Canonical);
-    //}
+    public SeoData Map()
+    {
+        return new SeoData(MetaKeyWords, MetaDescription, MetaTitle, Canonical);
+    }
     public static SeoDataViewModel ConvertToViewModel(SeoData seoData)
     {
         return new SeoDataViewModel()

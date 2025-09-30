@@ -1,4 +1,6 @@
-﻿namespace Common.Application;
+﻿using Common.Domain.ValueObjects;
+
+namespace Common.Application;
 
 public class SeoDataDto
 {
