@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace CoreModule.Application.Teacher.AcceptRequest;
 
-public record AcceptRequestTeacherCommand(Guid TheacherId) : IBaseCommand;
+public record AcceptRequestTeacherCommand(Guid TheacherId) : IBaseCommand
+{
+
+}
 
 public class AcceptRequestTeacherCommandHandler : IBaseCommandHandler<AcceptRequestTeacherCommand>
 {

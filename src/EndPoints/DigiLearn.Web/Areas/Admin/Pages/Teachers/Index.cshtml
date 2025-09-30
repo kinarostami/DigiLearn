@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{handler?}"
 @using CoreModule.Domain.Teacher.Enums
 @model DigiLearn.Web.Areas.Admin.Pages.Teachers.IndexModel
 @{
@@ -6,7 +6,6 @@
     ViewData["selected"] = "teachers";
 }
  <h3>@ViewData["title"]</h3>
- <a asp-page="Add" class="btn btn-success mb-2">افزودن مورد جدید</a>
  <div class="table-responsive card-body p-0">
      <table class="table table-bordered table-hover data-table">
          <thead>
@@ -42,11 +41,16 @@
                     <td>
                         @if (item.Status == TeacherStatus.Active)
                         {
-                            <Question>غیر فعال سازی</Question> 
+                            <Question class="btn btn-danger" url="@Url.Page("Index", "toggleStatus", new { teacherId = item.Id })">
+                                غیرفعال سازی
+
+                            </Question>
                         }
                         else if (item.Status == TeacherStatus.Inactive)
                         {
-                            <Question>فعال سازی</Question>
+                            <Question class="btn btn-success" url="@Url.Page("Index", "toggleStatus", new { teacherId = item.Id })">
+                                فعال سازی
+                            </Question>
                         }
                         <a class="btn btn-primary" asp-page="Show" asp-route-teacherId="@item.Id">نمایش</a>
                     </td>

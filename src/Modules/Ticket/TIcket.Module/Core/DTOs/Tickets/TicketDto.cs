@@ -2,7 +2,7 @@
 
 namespace TIcketModules.Core.DTOs.Tickets;
 
-public  class TicketDto
+public class TicketDto
 {
     public Guid Id { get; set; }
     public Guid UserId { get; set; }

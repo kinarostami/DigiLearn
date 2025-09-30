@@ -70,8 +70,14 @@ class TicketService : ITicketService
     {
         var result =  _ticketContext.Tickets.AsQueryable();
 
-        if(filterParams != null)
+        if(filterParams.UserId != null)
             result = result.Where(x => x.UserId == filterParams.UserId);
+        
+        if(string.IsNullOrWhiteSpace(filterParams.Title) == false)
+            result.Where(x => x.Title.Contains(filterParams.Title));
+
+        if (filterParams.Status != null)
+            result = result.Where(x => x.TicketStatus == filterParams.Status);
 
         var skip = (filterParams.PageId - 1) * filterParams.Take;
         var data = new TicketFilterReulst()
@@ -83,7 +89,8 @@ class TicketService : ITicketService
                 UserId = x.UserId,
                 CreationDate = x.CreationDate,
                 TicketStatus = x.TicketStatus,
-                Title = x.Title
+                Title = x.Title,
+                OwnerFullName = x.OwnerFullName
             }).ToListAsync()
         };
         data.GeneratePaging(result,filterParams.Take,filterParams.Take);

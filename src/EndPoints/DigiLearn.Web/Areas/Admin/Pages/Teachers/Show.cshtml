@@ -1,4 +1,4 @@
-﻿@page "{teacherId}"
+﻿@page "{teacherId}/{handler?}"
 @using CoreModule.Application._Utils
 @using CoreModule.Domain.Teacher.Enums
 @using DigiLearn.Web.Infrastructure.Utils
@@ -9,6 +9,10 @@
     ViewData["selected"] = "teachers";
 }
 <h3>@ViewData["title"]</h3>
+@if (Model.Teacher.Status == TeacherStatus.Pending)
+{
+    <Question class="btn btn-success" url="@Url.Page("Show","Accept",new {teacherId=Model.Teacher.Id})">تایید درخواست</Question>
+}
 <div class="card card-body">
     <img src="@UserModuleDirectories.GetUserAvatar(Model.Teacher.User.Avatar)" style="max-width : 150px" class="col-2" />
     <div class="row">
@@ -34,3 +38,12 @@
         <div class="col-md-12">رزومه : <a href="@CoreModuleDirectories.GetCvFile(Model.Teacher.CvFileName)" target="_blank">نمایش</a></div>
     </div>
 </div>
+@if (Model.Teacher.Status == TeacherStatus.Pending)
+{
+    <div>
+        <form asp-page-handler="Reject" method="post">
+            <textarea class="form-control" placeholder="دلیل رد درخواست"></textarea>
+            <button class="btn btn-danger mt-1" onclick="return confirm('آیا از انجام عملیات اطمینان دارید؟')">رد درخواست</button>
+        </form>
+    </div>
+}

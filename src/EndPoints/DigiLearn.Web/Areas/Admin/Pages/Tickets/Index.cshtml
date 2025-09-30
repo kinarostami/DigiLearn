@@ -1,0 +1,81 @@
+﻿@page
+@using CoreModule.Domain.Teacher.Enums
+@using DigiLearn.Web.Infrastructure.Utils
+@using TIcketModules.Data.Entities
+@model DigiLearn.Web.Areas.Admin.Pages.Tickets.IndexModel
+@{
+    ViewData["title"] = "مدیریت تیکت ها";
+    ViewData["selected"] = "tickets";
+}
+<form class="card mb-2">
+    <div class="card-header mb-0 pb-0 d-flex justify-content-between">
+        <h5>فیلتر</h5>
+        <div class="">
+            <a asp-page="Index" class="btn btn-sm btn-danger">حذف فیلتر</a>
+            <button type="submit" class="btn btn-success btn-sm">اعمال فیلتر</button>
+        </div>
+    </div>
+    <div class="card-body  mb-0">
+        <div class="row">
+            <div class="col-md-6">
+                <label>عنوان</label>
+                <input asp-for="FilterParams.Title" type="text" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label>عنوان</label>
+                <input asp-for="FilterParams.UserId" type="number" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label>وضعیت</label>
+                <select class="form-control" asp-for="FilterParams.Status">
+                    <option value="null">همه</option>
+                    <option value="@TicketStatus.Pending">درحال بررسی</option>
+                    <option value="@TicketStatus.Answered">پاسخ داده شده</option>
+                    <option value="@TicketStatus.Closed">بسته شده</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</form>
+ <h3>@ViewData["title"]</h3>
+ <div class="table-responsive card-body p-0">
+     <table class="table table-bordered table-hover">
+         <thead>
+             <tr>
+                 <th>عنوان</th>
+                 <th>نام و نام خانوادگی</th>
+                 <th>تاریخ ثبت</th>
+                 <th>وضعیت</th>
+                 <th>عملیات</th>
+             </tr>
+         </thead>
+         <tbody>
+             @foreach (var item in Model.FilterReulst.Data)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.OwnerFullName</td>
+                    <td>@item.CreationDate.ToPersianDateTime()</td>
+                    <td>
+                        @switch (item.TicketStatus)
+                        {
+                            case TicketStatus.Pending:
+                                <label class="badge bg-info">درحال بررسی</label>
+                                break;
+                            case TicketStatus.Answered:
+                                <label class="badge bg-success">پاسخ داده شده</label>
+                                break;
+                            case TicketStatus.Closed:
+                                <label class="badge bg-danger">بسته شده</label>
+                                break;
+                        }
+                    </td>
+                    <td>
+                        <a asp-page="Show" class="btn btn-primary" asp-route-id="@item.Id">نمایش</a>
+                    </td>
+                </tr>
+            }
+         </tbody>
+     </table>
+ </div>
+<partial name="_Pagination" model="Model.FilterReulst"/>
