@@ -113,6 +113,19 @@ public class Course : AggregateRoot
         Sections.Remove(section);
     }
 
+    public void EditEpisode(Guid episodeId,Guid sectionId,string title,bool isActive, bool isFree, TimeSpan timeSpan,string? attachmentName)
+    {
+        var section = Sections.FirstOrDefault(x => x.Id == sectionId);
+        if (section == null)
+            throw new InvalidDomainDataException("not remove sectoin");
+
+        var episode = section.Episodes.FirstOrDefault(x => x.Id == episodeId);
+        if (episode == null)
+            throw new InvalidDomainDataException("not remove episode");
+
+        episode.Edit(title,isActive,timeSpan, attachmentName);
+    }
+
     public Episode AddEpisode(Guid sectionId,string title, Guid token, TimeSpan timeSpan, string videoExtension, string? attachmentExtension, bool isActive,string engilshTitle,bool isFree)
     {
         
@@ -163,6 +176,13 @@ public class Course : AggregateRoot
 
         section.Episodes.Remove(episode);
         return episode;
+    }
+    public Episode? GetEpisodeById(Guid sectionId, Guid episodeId)
+    {
+        var section = Sections.FirstOrDefault(f => f.Episodes.Any(e => e.Id == episodeId));
+        if (section == null)
+            return null;
+        return section.Episodes.FirstOrDefault(f => f.Id == episodeId);
     }
 
     void Guard(string title,string description,string imageName,string slug)

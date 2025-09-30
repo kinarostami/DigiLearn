@@ -1,0 +1,36 @@
+﻿@page "{episodeId}/{courseId}"
+@using CoreModule.Application._Utils
+@using DigiLearn.Web.Infrastructure
+@model DigiLearn.Web.Areas.Admin.Pages.Courses.Section.EditEpisodeModel
+@{
+    ViewData["title"] = "ویرایش قسمت های دوره" + Model.Episode.Title;
+}
+<form method="post" class="card" enctype="multipart/form-data">
+        <div class="row card-body">
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.Title);
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.TimeSpan);
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.AttachmentFile);
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.VideoFile);
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.IsActive);
+            </div>
+        <div class="col-12 col-lg-6 col-md-6 ">
+            @Html.EditorFor(f => f.IsFree)
+        </div>
+        <div class="col-md-12">
+            <video controls="" style="width: 100%" src="@CoreModuleDirectories.GetEpisodeFile((Guid)Model.CourseId, Model.Episode.Token, Model.Episode.VideoName)">
+            </video>
+        </div>
+        </div>
+        <div class="card-footer text-left">
+            <button class="btn btn-success" type="submit">ثبت اطلاعات</button>
+        </div>
+</form>

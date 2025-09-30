@@ -6,8 +6,10 @@ using CoreModule.Application.Course.Edit;
 using CoreModule.Application.Course.Episodes.Accept;
 using CoreModule.Application.Course.Episodes.Add;
 using CoreModule.Application.Course.Episodes.Delete;
+using CoreModule.Application.Course.Episodes.Edit;
 using CoreModule.Application.Course.Sections.AddSection;
 using CoreModule.Query.Course._DTOs;
+using CoreModule.Query.Course.Episode.GetById;
 using CoreModule.Query.Course.GetByFilter;
 using CoreModule.Query.Course.GetById;
 using CoreModule.Query.Course.GetBySlug;
@@ -28,9 +30,11 @@ public interface ICourseFacade
     Task<OperationResult> AddEpisodes(AddCourseEpisode command);
     Task<OperationResult> AcceptEpisode(AcceptEpisodeCommand command);
     Task<OperationResult> DeleteEpisode(DeleteEpisodeCommand command);
+    Task<OperationResult> EditEpisode(EditCourseEpisodeCommand command);
 
     Task<CourseFilterResult> GetCourseFilter(CourseFilterParams param);
     Task<CourseDto?> GetCourseById(Guid id);
+    Task<EpisodeDto?> GetCourseEpisodeById(Guid episodeId);
     Task<CourseDto?> GetCourseBySlug(string slug);
 }
 public class CourseFacade : ICourseFacade
@@ -62,12 +66,17 @@ public class CourseFacade : ICourseFacade
         return await _mediator.Send(command);
     }
 
-    public Task<OperationResult> DeleteEpisode(DeleteEpisodeCommand command)
+    public async Task<OperationResult> DeleteEpisode(DeleteEpisodeCommand command)
     {
         return await _mediator.Send(command);
     }
 
     public async Task<OperationResult> Edit(EditCourseCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+
+    public async Task<OperationResult> EditEpisode(EditCourseEpisodeCommand command)
     {
         return await _mediator.Send(command);
     }
@@ -80,6 +89,11 @@ public class CourseFacade : ICourseFacade
     public async Task<CourseDto?> GetCourseBySlug(string slug)
     {
         return await _mediator.Send(new GetCourseBySlugQuery(slug));
+    }
+
+    public async Task<EpisodeDto?> GetCourseEpisodeById(Guid episodeId)
+    {
+        return await _mediator.Send(new GetCourseEpisodeByIdQuery(episodeId));
     }
 
     public async Task<CourseFilterResult> GetCourseFilter(CourseFilterParams param)
