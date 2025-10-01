@@ -48,7 +48,8 @@ public class RegisterUserCommandHandler : IBaseCommandHandler<RegisterUserComman
             Family = user.Family,
             Name = user.Name,
             Avatar = user.Avatar,
-            Password = user.Password
+            Password = user.Password,
+            Id = user.Id
         },null,Exchanges.UserTopicExchange,ExchangeType.Topic,"user.registered");
         return OperationResult<Guid>.Success(user.Id);
     }

@@ -159,7 +159,6 @@ namespace CoreModule.Infrastucture.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Avatar")
-                        .IsRequired()
                         .HasMaxLength(110)
                         .HasColumnType("nvarchar(110)");
 
@@ -167,17 +166,14 @@ namespace CoreModule.Infrastucture.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(110)
                         .HasColumnType("nvarchar(110)");
 
                     b.Property<string>("Family")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -187,6 +183,13 @@ namespace CoreModule.Infrastucture.Migrations
                         .HasColumnType("nvarchar(12)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
+
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique();
 
                     b.ToTable("Users", "dbo");
                 });

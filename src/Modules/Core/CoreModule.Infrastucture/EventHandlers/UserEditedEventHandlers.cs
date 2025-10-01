@@ -1,0 +1,88 @@
+﻿using Common.EventBus.Abstractions;
+using Common.EventBus.Events;
+using CoreModule.Infrastucture.Persistent;
+using CoreModule.Infrastucture.Persistent.Users;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CoreModule.Infrastucture.EventHandlers;
+
+public class UserEditedEventHandlers : BackgroundService
+{
+    private readonly IEventBus _eventBus;
+    private string _queueName = "coreModuleUserEdited";
+    private readonly ILogger<UserRegisterEventHandler> _logger;
+    private readonly IServiceScopeFactory _serviceFactory;
+    public UserEditedEventHandlers(IEventBus eventBus, ILogger<UserRegisterEventHandler> logger, IServiceScopeFactory serviceFactory)
+    {
+        _eventBus = eventBus;
+        _logger = logger;
+        _serviceFactory = serviceFactory;
+    }
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
+        var connection = _eventBus.Connection;
+        var serviceScope = _serviceFactory.CreateScope();
+
+        var context = serviceScope.ServiceProvider.GetRequiredService<CoreMoudelEfContext>();
+
+        var model = connection.CreateModel();
+        model.ExchangeDeclare(Exchanges.UserTopicExchange, ExchangeType.Topic, true, false, null);
+        model.QueueDeclare(_queueName, true, false, false, null);
+        model.QueueBind(_queueName, Exchanges.UserTopicExchange, "user.edited", null);
+
+        var consumer = new EventingBasicConsumer(model);
+        consumer.Received += async (sender, args) =>
+        {
+            try
+            {
+                var userJson = Encoding.UTF8.GetString(args.Body.ToArray());
+                var user = JsonConvert.DeserializeObject<UserEdited>(userJson);
+
+                var oldUser = await context.Users.FirstOrDefaultAsync(x => x.Id == user.UserId,stoppingToken);
+                if(oldUser == null)
+                {
+                    context.Users.Add(new User()
+                    {
+                        Id = user.UserId,
+                        PhoneNumber = user.PhoneNumber,
+                        Name = user.Name,
+                        Family = user.Family,
+                        Email = user.Email,
+                        CreationDate = user.CreationDate,
+                        Avatar = "default.png"
+                    });
+                }
+                else
+                {
+                    oldUser.Email = user.Email;
+                    oldUser.Name = user.Name;
+                    oldUser.Family = user.Family;
+                    oldUser.PhoneNumber = user.PhoneNumber;
+                    context.Update(oldUser);
+                }
+
+                    await context.SaveChangesAsync(stoppingToken);
+                model.BasicAck(args.DeliveryTag, false);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, e.Message);
+            }
+        };
+        model.BasicConsume(consumer, _queueName, false);
+    }
+}
+

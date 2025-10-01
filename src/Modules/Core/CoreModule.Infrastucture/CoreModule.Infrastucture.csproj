@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Common.EventBus\Common.EventBus.csproj" />
     <ProjectReference Include="..\..\..\Common\Common.Infrastucture\Common.Infrastucture.csproj" />
     <ProjectReference Include="..\CoreModule.Domain\CoreModule.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.9" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 ﻿using CoreModule.Domain.Category.Repository;
 using CoreModule.Domain.Course.Repository;
 using CoreModule.Domain.Teacher.Repository;
+using CoreModule.Infrastucture.EventHandlers;
 using CoreModule.Infrastucture.Persistent;
 using CoreModule.Infrastucture.Persistent.Category;
 using CoreModule.Infrastucture.Persistent.Course;
@@ -19,6 +20,8 @@ public class CoreModuleInfrastuctureBootstrapper
         services.AddScoped<ICourseRepository, CourseRepository>();
         services.AddScoped<ITeacherRepository, TeacherRepository>();
 
+        services.AddHostedService<UserRegisterEventHandler>();
+        services.AddHostedService<UserEditedEventHandlers>();
         services.AddDbContext<CoreMoudelEfContext>(option =>
         {
             option.UseSqlServer(configuration.GetConnectionString("CoreModule_Context"));
