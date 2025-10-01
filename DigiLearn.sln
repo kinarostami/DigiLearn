@@ -54,6 +54,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreModule.Facade", "srs\Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreModule.Config", "src\Modules\Core\CoreModule.Config\CoreModule.Config.csproj", "{D54D5929-0012-4A36-82F3-2B71D9C90F1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.EventBus", "src\Common\Common.EventBus\Common.EventBus.csproj", "{99F8CB15-339C-4EC8-BE53-CCE1AE959FD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -120,6 +122,10 @@ Global
 		{D54D5929-0012-4A36-82F3-2B71D9C90F1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D54D5929-0012-4A36-82F3-2B71D9C90F1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D54D5929-0012-4A36-82F3-2B71D9C90F1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99F8CB15-339C-4EC8-BE53-CCE1AE959FD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99F8CB15-339C-4EC8-BE53-CCE1AE959FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99F8CB15-339C-4EC8-BE53-CCE1AE959FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99F8CB15-339C-4EC8-BE53-CCE1AE959FD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -147,6 +153,7 @@ Global
 		{119FA8E8-A571-477B-A578-610253BB39C1} = {240CB332-BC4B-4957-98C9-AB760F332A7E}
 		{3A562625-7B70-426F-8A4E-AF48B0F1F4FA} = {240CB332-BC4B-4957-98C9-AB760F332A7E}
 		{D54D5929-0012-4A36-82F3-2B71D9C90F1C} = {240CB332-BC4B-4957-98C9-AB760F332A7E}
+		{99F8CB15-339C-4EC8-BE53-CCE1AE959FD5} = {DEE43A5D-5EC8-4123-B321-3A3C232A9CAE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A5E055AB-8E23-4E1F-BB83-698DB3C84F05}

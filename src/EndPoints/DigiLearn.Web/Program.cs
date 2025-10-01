@@ -38,7 +38,8 @@ builder.Services
 builder.Services
     .InitUsertModule(builder.Configuration)
     .InitTicketModule(builder.Configuration)
-    .InitCoreMoudle(builder.Configuration);
+    .InitCoreMoudle(builder.Configuration)
+    .RegisterWebDependencies();
 
 services.AddJwtAuthentication(builder.Configuration);
 

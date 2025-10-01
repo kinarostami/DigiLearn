@@ -1,7 +1,10 @@
 ﻿using Common.Application;
 using Common.Application.SecurityUtil;
+using Common.EventBus.Abstractions;
+using Common.EventBus.Events;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using RabbitMQ.Client;
 using UserModules.Data;
 using UserModules.Data.Entities.Users;
 
@@ -15,10 +18,12 @@ public class RegisterUserCommand : IBaseCommand<Guid>
 public class RegisterUserCommandHandler : IBaseCommandHandler<RegisterUserCommand, Guid>
 {
     private readonly UserContexts _context;
+    private readonly IEventBus _eventBus;
 
-    public RegisterUserCommandHandler(UserContexts context)
+    public RegisterUserCommandHandler(UserContexts context, IEventBus eventBus)
     {
         _context = context;
+        _eventBus = eventBus;
     }
 
     public async Task<OperationResult<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
@@ -36,6 +41,15 @@ public class RegisterUserCommandHandler : IBaseCommandHandler<RegisterUserComman
         };
         _context.Add(user);
         await _context.SaveChangesAsync(cancellationToken);
+        _eventBus.Publish(new UserRegistered()
+        {
+            PhoneNumber = user.PhoneNumber,
+            Email = user.Email,
+            Family = user.Family,
+            Name = user.Name,
+            Avatar = user.Avatar,
+            Password = user.Password
+        },null,Exchanges.UserTopicExchange,ExchangeType.Topic,"user.registered");
         return OperationResult<Guid>.Success(user.Id);
     }
 }
