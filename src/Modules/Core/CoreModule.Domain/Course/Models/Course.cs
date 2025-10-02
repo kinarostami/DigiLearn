@@ -41,7 +41,7 @@ public class Course : AggregateRoot
         CategoryId = categoryId;
         SubCategoryId = subCategoryId;
         Slug = slug;
-        Status = status;
+        Status = CourseActionStatus.Active;
         Sections = new();
     }
 

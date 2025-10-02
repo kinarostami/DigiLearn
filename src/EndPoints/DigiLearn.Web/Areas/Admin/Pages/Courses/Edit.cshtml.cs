@@ -9,6 +9,7 @@ using DigiLearn.Web.Infrastructure.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace DigiLearn.Web.Areas.Admin.Pages.Courses;
