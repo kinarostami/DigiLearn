@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UserModule.Core;
 using UserModule.Core.Services;
+using UserModules.Core.EventHandlers;
 using UserModules.Core.Services;
 using UserModules.Data;
 
@@ -19,8 +20,11 @@ public static class UserModuleBootstrapper
         {
             optoin.UseSqlServer(config.GetConnectionString("User_Contexts"));
         });
+        
         service.AddMediatR(typeof(UserModuleBootstrapper).Assembly);
-
+        
+        service.AddHostedService<NotificationEventHandler>();
+        
         service.AddScoped<IUserFacade, UserFacade>();
         service.AddScoped<IRoleFacade, RoleFacade>();
         service.AddScoped<INotificationFacade, NotificationFacade>();

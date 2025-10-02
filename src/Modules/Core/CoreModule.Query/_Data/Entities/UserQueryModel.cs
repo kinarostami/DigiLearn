@@ -14,10 +14,10 @@ namespace CoreModule.Query._Data.Entities;
 public class UserQueryModel : BaseEntity
 {
     [MaxLength(50)]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [MaxLength(50)]
-    public string Family { get; set; }
+    public string? Family { get; set; }
 
     [MaxLength(12)]
     public string PhoneNumber { get; set; }
@@ -26,5 +26,5 @@ public class UserQueryModel : BaseEntity
     public string? Email { get; set; }
 
     [MaxLength(110)]
-    public string Avatar { get; set; }
+    public string? Avatar { get; set; }
 }
