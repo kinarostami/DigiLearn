@@ -44,6 +44,9 @@ public class EditEpisodeModel : BaseRazor
     [BindProperty]
     public bool IsActive { get; set; }
     public string? VideoFileName { get; set; }
+
+    [BindProperty]
+    [Display(Name = "این قسمت رایگان است")]
     public bool IsFree { get; set; }
 
     public Guid? CourseId { get; set; }

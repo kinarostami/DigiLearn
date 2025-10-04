@@ -23,6 +23,7 @@
                                     <td>عنوان</td>
                                     <td>زمان</td>
                                     <td>وضعیت</td>
+                                    <td>رایگان</td>
                                     <td>عملیات</td>
                                 </tr>
                             </thead>
@@ -44,6 +45,15 @@
                                             else
                                             {
                                                  <label class="badge badge-danger">غیر فعال</label>
+                                            }
+                                        </th>
+                                        <th>@if(episode.IsFree)
+                                            {
+                                                <i class="bx bx-check text-success  "></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="bx bx-window-close text-danger  "></i>
                                             }
                                         </th>
                                         <th>

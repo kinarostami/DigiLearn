@@ -39,7 +39,7 @@ public class HomePageService : IHomePageService
                 TeacherName = x.Teacher,
                 Price = x.Price,
                 visit = 0,
-                Duration = "",
+                Duration = x.GetDuration(),
                 CommentCounts = 0
             }).ToList()
         };

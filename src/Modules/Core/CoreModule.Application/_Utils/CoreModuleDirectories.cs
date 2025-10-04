@@ -18,4 +18,7 @@ public class CoreModuleDirectories
 
     public static string GetEpisodeFile(Guid courseId, Guid episodeToken,string fileName) 
         => $"{CourseEpisode(courseId,episodeToken).Replace("wwwroot", "")}/{fileName}";
+
+    public static string GetCourseDemo(Guid courseId,string fileName) 
+        => $"{CourseDemoVideo(courseId).Replace("wwwroot", "")}/{fileName}";
 }

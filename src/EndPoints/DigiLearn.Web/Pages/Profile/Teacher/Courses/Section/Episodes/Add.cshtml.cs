@@ -41,6 +41,9 @@ public class AddModel : BaseRazor
     [FileType("rar", ErrorMessage = "ویدیو نامعتبر است")]
     public IFormFile? AttachmentFile { get; set; }
 
+    [Display(Name = "این قسمت رایگان است")]
+    public bool IsFree { get; set; }
+
 
     public void OnGet()
     {
@@ -57,7 +60,7 @@ public class AddModel : BaseRazor
             VideoFile = VideoFile,
             AttachmentFile = AttachmentFile,
             IsActive = false,
-            IsFree = false
+            IsFree = IsFree
         });
 
         return RedirectAndShowAlert(result, RedirectToPage("../Index", new { courseId }));

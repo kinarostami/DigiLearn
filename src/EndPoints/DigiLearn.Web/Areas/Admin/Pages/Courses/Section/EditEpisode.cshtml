@@ -22,9 +22,9 @@
             <div class="col-md-6">
                 @Html.EditorFor(x => x.IsActive);
             </div>
-        <div class="col-12 col-lg-6 col-md-6 ">
-            @Html.EditorFor(f => f.IsFree)
-        </div>
+            <div class="col-12 col-lg-6 col-md-6 ">
+                @Html.EditorFor(f => f.IsFree)
+            </div>
         <div class="col-md-12">
             <video controls="" style="width: 100%" src="@CoreModuleDirectories.GetEpisodeFile((Guid)Model.CourseId, Model.Episode.Token, Model.Episode.VideoName)">
             </video>
