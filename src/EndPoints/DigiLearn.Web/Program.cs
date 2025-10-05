@@ -1,3 +1,4 @@
+using BlogModules;
 using Common.Application.FileUtil.Interfaces;
 using Common.Application.FileUtil.Services;
 using CoreModule.Config;
@@ -39,6 +40,7 @@ builder.Services
     .InitUsertModule(builder.Configuration)
     .InitTicketModule(builder.Configuration)
     .InitCoreMoudle(builder.Configuration)
+    .InitBlogModule(builder.Configuration)
     .RegisterWebDependencies();
 
 services.AddJwtAuthentication(builder.Configuration);

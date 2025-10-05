@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BlogModules.Domain;
 
-[Index("Slg",IsUnique = true)]
+[Index("Slug",IsUnique = true)]
 [Table("Posts",Schema = "dbo")]
 class Post : BaseEntity
 {
