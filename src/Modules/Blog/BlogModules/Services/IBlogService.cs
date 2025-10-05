@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
+using BlogModules.Context;
 using BlogModules.Domain;
 using BlogModules.Repository.Categories;
 using BlogModules.Repository.Posts;
 using BlogModules.Service.DTOs.Command;
 using BlogModules.Service.DTOs.Query;
+using BlogModules.Services.DTOs.Query;
 using BlogModules.Utils;
 using Common.Application;
 using Common.Application.FileUtil;
 using Common.Application.FileUtil.Interfaces;
 using Common.Application.SecurityUtil;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -29,8 +32,10 @@ public interface IBlogService
 
     Task<OperationResult> CreatePost(CreatePostCommand command);
     Task<OperationResult> EditPost(EditPostCommand command);
-    Task<OperationResult> DeletePost(Guid postId);
+    Task<OperationResult> DeletePost(Guid id);
     Task<BlogPostDto?> GetPostById(Guid id);
+    Task<BlogPostFilterItemDto?> GetPostBySlug(string slug);
+    Task<BlogPostFilterResult> GetPostByFilter(BlogPostFilterParams filterParams);
 }
 class BlogService : IBlogService
 {
@@ -38,12 +43,15 @@ class BlogService : IBlogService
     private readonly IPostRepository _postRepository;
     private readonly IMapper _mapper;
     private readonly ILocalFileService _localFileService;
+    private readonly BlogContext _context;
 
-    public BlogService(ICategoryRepository categoryRepository, IMapper mapper, IPostRepository postRepository)
+    public BlogService(ICategoryRepository categoryRepository, IMapper mapper, IPostRepository postRepository, BlogContext context, ILocalFileService localFileService)
     {
         _categoryRepository = categoryRepository;
         _mapper = mapper;
         _postRepository = postRepository;
+        _context = context;
+        _localFileService = localFileService;
     }
 
     public async Task<OperationResult> CreateCategory(CreateBlogCategoryCommand command)
@@ -55,18 +63,21 @@ class BlogService : IBlogService
         }
 
         _categoryRepository.Add(category);
-        _categoryRepository.Save();
+        await _categoryRepository.Save();
         return OperationResult.Success();
     }
 
     public async Task<OperationResult> CreatePost(CreatePostCommand command)
     {
         var post = _mapper.Map<Post>(command);
-        if (await _postRepository.ExistsAsync(x => x.Slug == post.Slug))
+        if (await _postRepository.ExistsAsync(f => f.Slug == command.Slug))
             return OperationResult.Error("Slug is Exist");
 
-        if(command.ImageFile.IsImage() == false)
+        if (command.ImageFile.IsImage() == false)
             return OperationResult.Error("عکس وارد شده نامعتبر است");
+
+        if (_localFileService == null)
+            throw new InvalidOperationException("_localFileService is not injected");
 
         var imageName = await _localFileService.SaveFileAndGenerateName(command.ImageFile, BlogDirectories.PostImage);
         post.ImageName = imageName;
@@ -74,7 +85,7 @@ class BlogService : IBlogService
         post.Description = post.Description.SanitizeText();
 
         _postRepository.Add(post);
-        _postRepository.Save();
+        await _postRepository.Save();
         return OperationResult.Success();
     }
 
@@ -91,12 +102,12 @@ class BlogService : IBlogService
         return OperationResult.Success();
     }
 
-    public async Task<OperationResult> DeletePost(Guid postId)
+    public async Task<OperationResult> DeletePost(Guid id)
     {
-        var post = await _postRepository.GetTracking(postId);
+        var post = await _postRepository.GetTracking(id);
         if (post == null)
             return OperationResult.NotFound();
-        if (await _postRepository.ExistsAsync(x => x.CategoryId == postId))
+        if (await _postRepository.ExistsAsync(x => x.CategoryId == id))
             return OperationResult.Error("این دسته بندی قبلا استفاده شده , لطفا پست های مربوطه را حذف کنید و دوباره امتحان کنید");
 
         _postRepository.Delete(post);
@@ -120,7 +131,7 @@ class BlogService : IBlogService
         category.Title = command.Title;
 
         _categoryRepository.Update(category);
-        _categoryRepository.Save();
+        await _categoryRepository.Save();
         return OperationResult.Success();
     }
 
@@ -147,7 +158,6 @@ class BlogService : IBlogService
         post.Slug = command.Slug;
         post.OwnerName = command.OwnerName;
         post.Title = command.Title;
-        post.UserId = command.UserId;
         post.CategoryId = command.CategoryId;
 
         _postRepository.Update(post);
@@ -169,6 +179,44 @@ class BlogService : IBlogService
         return _mapper.Map<BlogCategoryDto>(category);
     }
 
+    public async Task<BlogPostFilterResult> GetPostByFilter(BlogPostFilterParams filterParams)
+    {
+        var result = _context.Posts.OrderByDescending(c => c.CreationDate)
+            .Include(x => x.Category).AsQueryable();
+
+        if(string.IsNullOrWhiteSpace(filterParams.Search) == false)
+            result = result.Where(x => 
+            x.Title.Contains(filterParams.Search) || x.Description.Contains(filterParams.Search));
+
+        if(string.IsNullOrWhiteSpace(filterParams.CategorySlug) == false)
+            result = result.Where(x => x.Category.Slug ==  filterParams.CategorySlug);
+
+        var skip = (filterParams.PageId - 1) * filterParams.Take;
+        var model = new BlogPostFilterResult()
+        {
+            Data = await result.Skip(skip).Take(filterParams.Take).Select(x => new BlogPostFilterItemDto
+            {
+                CreationDate = x.CreationDate,
+                Title = x.Title,
+                Description = x.Description,
+                Slug = x.Slug,
+                ImageName = x.ImageName,
+                Id = x.Id,
+                OwnerName = x.OwnerName,
+                UserId = x.UserId,
+                Visit = x.Visit,
+                Category = new BlogCategoryDto()
+                {
+                    Id = x.CategoryId,
+                    Slug = x.Category.Slug,
+                    Title = x.Category.Title
+                }
+            }).ToListAsync()
+        };
+        model.GeneratePaging(result, filterParams.Take, filterParams.PageId);
+        return model;
+    }
+
     public async Task<BlogPostDto?> GetPostById(Guid id)
     {
         var post = _postRepository.GetAsync(id);
@@ -176,5 +224,31 @@ class BlogService : IBlogService
             return null;
 
         return _mapper.Map<BlogPostDto>(post);
+    }
+
+    public async Task<BlogPostFilterItemDto?> GetPostBySlug(string slug)
+    {
+        var post = await _context.Posts.Include(x => x.Category).FirstOrDefaultAsync(x => x.Slug == slug);
+        if (post == null)
+            return null;
+
+        return new BlogPostFilterItemDto()
+        {
+            Slug = post.Slug,
+            Title = post.Title,
+            CreationDate = post.CreationDate,
+            Description = post.Description,
+            ImageName = post.ImageName,
+            Id = post.Id,
+            UserId = post.UserId,
+            OwnerName = post.OwnerName,
+            Visit = post.Visit,
+            Category = new BlogCategoryDto()
+            {
+                Id = post.CategoryId,
+                Slug = post.Category.Slug,
+                Title = post.Category.Title
+            }
+        };
     }
 }

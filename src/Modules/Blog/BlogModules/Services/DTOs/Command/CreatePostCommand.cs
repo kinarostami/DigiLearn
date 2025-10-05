@@ -21,7 +21,6 @@ namespace BlogModules.Service.DTOs.Command
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
-        public Guid UserId { get; set; }
         public string Slug { get; set; }
         public string OwnerName { get; set; }
         public string Descriptoin { get; set; }
