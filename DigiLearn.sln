@@ -56,6 +56,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreModule.Config", "src\Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.EventBus", "src\Common\Common.EventBus\Common.EventBus.csproj", "{99F8CB15-339C-4EC8-BE53-CCE1AE959FD5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Comment", "Comment", "{020A0C38-0F2D-4768-B142-FAAEBB6E83E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommentModules", "src\Modules\Comment\CommentModules\CommentModules.csproj", "{A8DFE17C-5E70-47C5-AC77-64858CF2F79D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -126,6 +130,10 @@ Global
 		{99F8CB15-339C-4EC8-BE53-CCE1AE959FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99F8CB15-339C-4EC8-BE53-CCE1AE959FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99F8CB15-339C-4EC8-BE53-CCE1AE959FD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8DFE17C-5E70-47C5-AC77-64858CF2F79D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8DFE17C-5E70-47C5-AC77-64858CF2F79D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8DFE17C-5E70-47C5-AC77-64858CF2F79D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8DFE17C-5E70-47C5-AC77-64858CF2F79D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -154,6 +162,8 @@ Global
 		{3A562625-7B70-426F-8A4E-AF48B0F1F4FA} = {240CB332-BC4B-4957-98C9-AB760F332A7E}
 		{D54D5929-0012-4A36-82F3-2B71D9C90F1C} = {240CB332-BC4B-4957-98C9-AB760F332A7E}
 		{99F8CB15-339C-4EC8-BE53-CCE1AE959FD5} = {DEE43A5D-5EC8-4123-B321-3A3C232A9CAE}
+		{020A0C38-0F2D-4768-B142-FAAEBB6E83E3} = {ABFAB972-6549-433D-AA92-D4D3FD40EB99}
+		{A8DFE17C-5E70-47C5-AC77-64858CF2F79D} = {020A0C38-0F2D-4768-B142-FAAEBB6E83E3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A5E055AB-8E23-4E1F-BB83-698DB3C84F05}

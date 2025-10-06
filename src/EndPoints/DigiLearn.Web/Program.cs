@@ -1,4 +1,5 @@
 using BlogModules;
+using CommentModules;
 using Common.Application.FileUtil.Interfaces;
 using Common.Application.FileUtil.Services;
 using CoreModule.Config;
@@ -41,6 +42,7 @@ builder.Services
     .InitTicketModule(builder.Configuration)
     .InitCoreMoudle(builder.Configuration)
     .InitBlogModule(builder.Configuration)
+    .InitCommentModule(builder.Configuration)
     .RegisterWebDependencies();
 
 services.AddJwtAuthentication(builder.Configuration);
