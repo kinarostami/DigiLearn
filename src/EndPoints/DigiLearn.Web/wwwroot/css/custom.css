@@ -8,3 +8,6 @@
 .col-md-12{
     margin-top : 1rem
 }
+img{
+    object-fit : cover
+}

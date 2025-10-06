@@ -1,0 +1,46 @@
+﻿@using BlogModules.Services.DTOs.Query
+@using BlogModules.Utils
+@model BlogPostFilterItemDto
+@{
+    var href = $"/blog/{Model.Slug}";
+}
+<div class="article">
+    <div class="main-article shadow">
+        <div class="image-layer">
+            <img src="@BlogDirectories.GetPostImage(Model.ImageName)" />
+            <div class="image-cover">
+                <a class="image-link" href="@href"></a>
+
+                <a class="btn-show" href="@href">
+                    مشاهده مقاله
+                </a>
+            </div>
+        </div>
+        <div class="article-body p-2">
+            <div class="title">
+                <a href="@href">@Model.Title</a>
+            </div>
+
+            <p class="description">
+                @Model.Description
+            </p>
+
+            <div class="filter"></div>
+
+        </div>
+        <div class="article-footer">
+            <span>
+                <i class="zmdi zmdi-eye"></i>
+                @Model.Visit
+            </span>
+            <span>
+                <i class="fa fa-comments-o"></i>
+                @Model.Category.Title
+            </span>
+            <a href="#">
+                <i class="zmdi zmdi-account"></i>
+                @Model.OwnerName
+            </a>
+        </div>
+    </div>
+</div>

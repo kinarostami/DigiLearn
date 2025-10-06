@@ -1,4 +1,5 @@
 ﻿using BlogModules.Service;
+using BlogModules.Services.DTOs.Query;
 using CoreModue.Facade.Course;
 using CoreModule.Domain.Course.Enums;
 using CoreModule.Query.Course._DTOs;
@@ -13,10 +14,12 @@ public interface IHomePageService
 public class HomePageService : IHomePageService
 {
     private readonly ICourseFacade _courseFacade;
+    private readonly IBlogService _blogService;
 
-    public HomePageService(ICourseFacade courseFacade)
+    public HomePageService(ICourseFacade courseFacade, IBlogService blogService)
     {
         _courseFacade = courseFacade;
+        _blogService = blogService;
     }
 
     public async Task<HomePageViewModel> GetData()
@@ -27,6 +30,12 @@ public class HomePageService : IHomePageService
             ActionStatus = CourseActionStatus.Active,
             PageId = 1,
             FilterSort = CourseFilterSort.Latest
+        });
+
+        var post = await _blogService.GetPostByFilter(new BlogPostFilterParams()
+        {
+            Take = 6,
+            PageId = 1,
         });
 
         var model = new HomePageViewModel()
@@ -41,7 +50,8 @@ public class HomePageService : IHomePageService
                 visit = 0,
                 Duration = x.GetDuration(),
                 CommentCounts = 0
-            }).ToList()
+            }).ToList(),
+            LatestArticles = post.Data
         };
         return model;
     }

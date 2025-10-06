@@ -30,6 +30,7 @@ public interface IBlogService
     Task<List<BlogCategoryDto>> GetAllCategoris();
     Task<BlogCategoryDto> GetCategoryById(Guid id);
 
+    Task AddVisit(Guid id);
     Task<OperationResult> CreatePost(CreatePostCommand command);
     Task<OperationResult> EditPost(EditPostCommand command);
     Task<OperationResult> DeletePost(Guid id);
@@ -52,6 +53,17 @@ class BlogService : IBlogService
         _postRepository = postRepository;
         _context = context;
         _localFileService = localFileService;
+    }
+
+    public async Task AddVisit(Guid id)
+    {
+        var post = await _postRepository.GetAsync(id);
+        if (post != null)
+        {
+            post.Visit += 1;
+            _postRepository.Update(post);
+            await _context.SaveChangesAsync();
+        }
     }
 
     public async Task<OperationResult> CreateCategory(CreateBlogCategoryCommand command)
