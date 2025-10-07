@@ -8,5 +8,7 @@ namespace UserModules.Data.Entities._Enums;
 
 public enum Permissions
 {
-
+    مدیریت_کاربران,
+    مدیریت_مدرسین,
+    مدیریت_دوره
 }

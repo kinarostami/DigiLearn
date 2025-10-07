@@ -63,7 +63,7 @@
       <div class="content-overlay"></div>
       <div class="content-wrapper">
             <div class="content-body">
-                <3>@ViewData["title"]</3>
+                <h3>@ViewData["title"]</h3>
             @RenderBody();
             </div>
         </div>
@@ -101,7 +101,7 @@
     <script src="/global/global.js" asp-append-version="true"></script>
     <script src="/admin/js/scripts/customizer.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <partial name="Sheard/_ValidationScriptsPartial" />
+    @* <partial name="Sheard/_ValidationScriptsPartial" /> *@
     <script src="/global/clientValidation.js"></script>
     <div id="token-value">
         @Html.AntiForgeryToken()

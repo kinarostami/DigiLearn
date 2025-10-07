@@ -50,7 +50,6 @@ class RoleFacade : IRoleFacade
     {
         return await _mediator.Send(new GetRoleByIdQuery(id));
 
-
     }
 
     public async Task<List<Role>> GetAllRoles()

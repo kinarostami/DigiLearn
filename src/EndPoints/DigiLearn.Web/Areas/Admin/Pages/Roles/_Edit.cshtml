@@ -1,0 +1,29 @@
+﻿@using DigiLearn.Web.ViewModels
+@using UserModules.Data.Entities._Enums
+@model EditRoleViewModel
+
+<form class="row" asp-page-handler="Edit" data-ajax="true" method="post">
+    @Html.HiddenFor(x => x.RoleId)
+    <div class="col-md-6">
+        @Html.EditorFor(f => f.Name)
+    </div>
+    <div class="col-md-6">
+        <ul>
+            @foreach (var item in Enum.GetNames(typeof(Permissions)))
+            {
+                <li>
+                    <label class="cursor-pointer">
+                        <input type="checkbox"
+                               checked="@(Model.SelectedPermissions
+                               .Any(x => x.ToString() == item) ? "checked" : null)" name="permissions" value="@item" />
+                        @item.Replace("_", " ")
+                    </label>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-6"></div>
+    <div class="card-footer text-left">
+        <button class="btn btn-success" type="submit">ثبت اطلاعات</button>
+    </div>
+</form>

@@ -1,0 +1,74 @@
+﻿@page "{handler?}"
+@using UserModules.Data.Entities._Enums
+@model DigiLearn.Web.Areas.Admin.Pages.Roles.IndexModel
+@{
+    ViewData["title"] = "مدیریت نقش ها";
+    ViewData["selected"] = "roles";
+}
+<button data-toggle="modal" data-target="#addModal" class="btn btn-success mb-1">افزودن مورد جدید</button>
+ <div class="table-responsive card-body p-0">
+     <table class="table table-bordered table-hover">
+         <thead>
+             <tr>
+                 <th>عنوان</th>
+                 <th>دسترسی ها</th>
+                 <th>عملیات</th>
+             </tr>
+         </thead>
+         <tbody>
+             @foreach (var item in Model.Roles)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>
+                        @foreach (var permission in item.Permissions.Select(x => x.Permissions))
+                        {
+                            <label class="badge badge-primary">@permission.ToString().Replace("_"," ")</label>
+                        }
+                    </td>
+                    <td>
+                        <open-modal is-bootstrap4="true" modal-title="ویرایش نقش" class="btn btn-sm btn-primary" url="@Url.Page("Index", "ShowEditPage", new { id = item.Id })">ویرایش</open-modal>
+                        <delete-item url="@Url.Page("Index","Delete",new {id=item.Id})">حذف</delete-item>
+                    </td>
+                </tr>
+            }
+         </tbody>
+     </table>
+ </div>
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="editAddressModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editAddressModalLabel">افزودن دسته بندی</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row"  data-ajax="true" method="post">
+                    <div class="col-md-6">
+                        @Html.EditorFor(f => f.Name)
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            @foreach (var item in Enum.GetNames(typeof(Permissions)))
+                                {
+                                    <li>
+                                        <label class="cursor-pointer">
+                                            <input type="checkbox" name="permissions" value="@item" />
+                                            @item.Replace("_"," ")
+                                        </label>
+                                    </li>
+                                }
+                        </ul>
+                    </div>
+                    <div class="col-md-6"></div>
+                    <div class="card-footer text-left">
+                        <button class="btn btn-success" type="submit">ثبت اطلاعات</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
