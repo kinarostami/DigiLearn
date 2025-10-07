@@ -32,6 +32,7 @@ var services = builder.Services;
 builder.Services.AddScoped<ILocalFileService, LocalFileService>();
 builder.Services.AddScoped<IFtpFileService, FtpFileService>();
 builder.Services.AddScoped<TeacherActionFilter>();
+builder.Services.AddControllersWithViews();
 
 // Add services to the container.
 builder.Services

@@ -62,6 +62,7 @@ public class CommentFilterParams : BaseFilterParam
     public DateTime? EndDate { get; set; }
     public CommentType? CommentType { get; set; } = null;
     public Guid? EntityId { get; set; }
+    [Display(Name = "نام")]
     public string? Name { get; set; }
     public string? Family { get; set; }
 }

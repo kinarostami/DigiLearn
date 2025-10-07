@@ -61,7 +61,8 @@ public class CommentService : ICommentService
     {
         var comment = await _commentContext.Comments
             .Include(x => x.User)
-            .Include(x => x.Replise).FirstOrDefaultAsync(c => c.Id == id);
+            .Include(x => x.Replise)
+            .ThenInclude(x => x.User ).FirstOrDefaultAsync(c => c.Id == id);
 
         if (comment == null)
             return null;
@@ -199,7 +200,7 @@ public class CommentService : ICommentService
                     IsActive = s.IsActive,
                     Text = s.Text,
                     UserId = s.UserId,
-                    Email = s.User.Email.SetUnReadableEmail()
+                    Email = s.User.Email
                 }).ToListAsync()
         };
         model.GeneratePaging(query, filterParams.Take, filterParams.PageId);

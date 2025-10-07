@@ -29,7 +29,8 @@ namespace DigiLearn.Web.Pages.Blog
             FilterResult = await _commentService.GetCommentByFilter(new CommentFilterParams()
             {
                 EntityId = post.Id,
-                CommentType = CommentModules.Domain.CommentType.Article
+                CommentType = CommentModules.Domain.CommentType.Article,
+                Take = 2
             });
             
             BlogPost = post;
