@@ -8,6 +8,7 @@ using UserModules.Core.Commands.Users.ChangeAvatar;
 using UserModules.Core.Commands.Users.ChangePassword;
 using UserModules.Core.Commands.Users.Edit;
 using UserModules.Core.Commands.Users.Register;
+using UserModules.Core.Queries.Users.GetByFilter;
 
 namespace UserModule.Core.Services;
 
@@ -18,8 +19,10 @@ public interface IUserFacade
     Task<OperationResult> EditUser(FullEditUserCommand command);
     Task<OperationResult> ChangeAvatar(ChangeUserAvatarCommand command);
     Task<OperationResult> ChangePassword(ChangeUserPasswordCommand command);
+    
     Task<UserDto?> GetUserByPhoneNumber(string phoneNumber);
     Task<UserDto?> GetById(Guid id);
+    Task<UserFilterResult> GetByFilter(UserFilterParams filterParams);
 }
 
 
@@ -66,5 +69,10 @@ public class UserFacade : IUserFacade
     {
         return await _mediator.Send(new GetUserByIdQuery(id));
 
+    }
+
+    public async Task<UserFilterResult> GetByFilter(UserFilterParams filterParams)
+    {
+        return await _mediator.Send(new GetUserByFilterQuery(filterParams));
     }
 }

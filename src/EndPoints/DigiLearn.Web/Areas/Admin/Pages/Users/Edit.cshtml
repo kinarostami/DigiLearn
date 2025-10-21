@@ -1,0 +1,43 @@
+﻿@page "{id}"
+@using UserModule.Core.Services
+@model DigiLearn.Web.Areas.Admin.Pages.Users.EditModel
+@{
+    ViewData["title"] = "ویرایش کاربر ها";
+    ViewData["selected"] = "users";
+}
+@inject IRoleFacade roleFacade;
+@{
+    var roles = await roleFacade.GetAllRoles();
+}
+<form method="post" class="card">
+        <div class="row card-body">
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.Name);
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.Family);
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(x => x.PhoneNumber);
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(x => x.Email);
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.Password);
+            </div>
+            <div class="col-md-6">
+            <div class="form-input">
+                <p>نقش ها</p>
+                <select class="select2" multiple="multiple" name="roles"></select>
+                @foreach (var item in roles)
+                {
+                    <option selected="@(Model.CurrentUserRoles.Any(x => x == item.Id) ? "selected" : null)" value="@item.Id">@item.Name</option>
+                }
+            </div>
+            </div>
+        </div>
+        <div class="card-footer text-left">
+            <button class="btn btn-success" type="submit">ثبت اطلاعات</button>
+        </div>
+</form>
