@@ -22,6 +22,8 @@ public class CoreModuleInfrastuctureBootstrapper
 
         services.AddHostedService<UserRegisterEventHandler>();
         services.AddHostedService<UserEditedEventHandlers>();
+        services.AddHostedService<UserChangeAvatarEventHandlers>();
+
         services.AddDbContext<CoreMoudelEfContext>(option =>
         {
             option.UseSqlServer(configuration.GetConnectionString("CoreModule_Context"));

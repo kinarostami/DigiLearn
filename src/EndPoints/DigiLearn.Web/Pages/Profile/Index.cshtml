@@ -16,15 +16,18 @@
 
                         <div class="info-body p-2">
                             <div>
-                                <p>کینا رستمی</p>
+                                <p>نام و نام خانوادگی : @Model.UserDto.FullName</p>
                             </div>
                             <div>
-                                <p>ایمیل : <label>kinaro3tami@gmail.com</label></p>
+                            <p>ایمیل : <label>@Model.UserDto.Email</label></p>
                             </div>
                             <div>
-                                <p>شماره تلفن : 099932680778</p>
+                                <p>شماره تلفن : @Model.UserDto.PhoneNumber</p>
                             </div>
-                            <a href="#" class="btn btn-info btn-block">تکمیل اطلاعات </a>
+                            <div>
+                                <p> تاریخ ثبت : @Model.UserDto.CreationDate.ToPersianDate("ds dd ms Y")</p>
+                            </div>
+                            <a href="/profile/edit" class="btn btn-info btn-block">تکمیل اطلاعات </a>
                         </div>
                     </div>
 

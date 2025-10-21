@@ -4,6 +4,7 @@
 @inject IUserFacade _userFacade
 @{
     var user = await _userFacade.GetUserByPhoneNumber(User.GetPhoneNumber());
+    var currentPath = Context.Request.Path.ToString().ToLower();
 }
 
 <div class="col-12 col-xl-3 col-lg-3 col-md-4">
@@ -13,12 +14,13 @@
                 <i class="zmdi zmdi-power text-danger"></i>
             </a>
             <div class="image">
-                <form>
+                <form method="post" action="/profile" id="change_avatar" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
                     <a href="javascript:void(0)" title="تغییر آواتار" data-toggle="tooltip">
-                        <input type="file" id="upImgAvatar" name="avatar" class="ProfileAvatarInput">
+                        <input type="file" accept="*\image" id="upImgAvatar" name="avatar" class="ProfileAvatarInput">
                         <i class="zmdi zmdi-edit"></i>
                     </a>
-                    <img src="@UserModuleDirectories.GetUserAvatar(user!.Avatar)" alt="">
+                    <img src="@UserModuleDirectories.GetUserAvatar(user!.Avatar)" alt="@user.FullName">
 
                 </form>
             </div>
@@ -33,52 +35,52 @@
         </div>
         <ul>
             <li>
-                <a href="/" class="selected">
+                <a href="/" class="@(currentPath=="/profile"?"selected":null)">
                     <i class="zmdi zmdi-view-dashboard"></i>
                     داشبورد
 
                 </a>
             </li>
             <li>
-                <a href="/profile/edit">
+                <a href="/profile/edit" class="@(currentPath == "/profile/edit" ? "selected" : null)">
                     <i class="fa fa-user-edit"></i>
 
                     ویرایش حساب کاربری
                 </a>
             </li>
             <li>
-                <a href="/profile/changePassword">
+                <a href="/profile/changePassword" class="@(currentPath == "/profile/changepassword" ? "selected" : null)">
                     <i class="fa fa-edit"></i>
 
                     ویرایش رمز عبور
                 </a>
             </li>
             <li>
-                <a href="/profile/ticket">
+                <a href="/profile/ticket" class="@(currentPath == "/profile/ticket" ? "selected" : null)">
                     <i class="fa fa-paper-plane"></i>
                     تیکت ها
                 </a>
             </li>
             <li>
-                <a href="/profile/orders">
+                <a href="/profile/orders" class="@(currentPath == "/profile/orders" ? "selected" : null)">
                     <i class="zmdi zmdi-gradient"></i>
                     فاکتور ها
                 </a>
             </li>
             <li>
-                <a href="/Profile/Teacher/Courses">
+                <a href="/Profile/Teacher/Courses" class="@(currentPath == "/profile/Teacher/Courses" ? "selected" : null)">
                     <i class="fa fa-graduation-cap"></i>
                     دوره های من
                 </a>
             </li>
             <li>
-                <a href="/profile/comments">
+                <a href="/profile/comments" class="@(currentPath == "/profile/comments" ? "selected" : null)">
                     <i class="fa fa-comments-o"></i>
                     نظرات
                 </a>
             </li>
             <li>
-                <a href="/profile/notifications">
+                <a href="/profile/notifications" class="@(currentPath == "/profile/notifications" ? "selected" : null)">
                     <i class="zmdi zmdi-notifications"></i>
 
                     پیغام ها
