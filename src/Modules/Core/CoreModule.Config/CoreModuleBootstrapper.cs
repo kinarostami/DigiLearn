@@ -3,9 +3,11 @@ using CoreModule.Application._Utils;
 using CoreModule.Application.Category;
 using CoreModule.Application.Category.Create;
 using CoreModule.Application.Course;
+using CoreModule.Application.Order;
 using CoreModule.Application.Teacher;
 using CoreModule.Domain.Category.DomainServices;
 using CoreModule.Domain.Course.DomainServices;
+using CoreModule.Domain.Order.DomainServices;
 using CoreModule.Domain.Teacher.DomainServices;
 using CoreModule.Facade;
 using CoreModule.Infrastucture;
@@ -29,6 +31,7 @@ public static class CoreModuleBootstrapper
         services.AddScoped<ICategoryDomainService, CategoryDomainService>();
         services.AddScoped<ICourseDomainService, CourseDomianService>();
         services.AddScoped<ITeacherDomainService, TeacherDomianService>();
+        services.AddScoped<IOrderDomainService, OrderDomainService>();
 
         services.AddMediatR(typeof(CreateCourseCategoryCommand).Assembly);
         services.AddValidatorsFromAssembly(typeof(CreateCourseCategoryCommand).Assembly);

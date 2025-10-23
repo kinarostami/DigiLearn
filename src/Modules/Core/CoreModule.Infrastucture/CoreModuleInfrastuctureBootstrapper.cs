@@ -1,10 +1,12 @@
 ﻿using CoreModule.Domain.Category.Repository;
 using CoreModule.Domain.Course.Repository;
+using CoreModule.Domain.Order.Repositories;
 using CoreModule.Domain.Teacher.Repository;
 using CoreModule.Infrastucture.EventHandlers;
 using CoreModule.Infrastucture.Persistent;
 using CoreModule.Infrastucture.Persistent.Category;
 using CoreModule.Infrastucture.Persistent.Course;
+using CoreModule.Infrastucture.Persistent.Order;
 using CoreModule.Infrastucture.Persistent.Teacher;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +21,7 @@ public class CoreModuleInfrastuctureBootstrapper
         services.AddScoped<ICourseCategoryRepository, CourseCategoryRepository>();
         services.AddScoped<ICourseRepository, CourseRepository>();
         services.AddScoped<ITeacherRepository, TeacherRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
 
         services.AddHostedService<UserRegisterEventHandler>();
         services.AddHostedService<UserEditedEventHandlers>();

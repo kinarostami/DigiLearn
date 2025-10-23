@@ -1,6 +1,7 @@
 ﻿using CoreModue.Facade.Category;
 using CoreModue.Facade.Course;
 using CoreModue.Facade.Teacher;
+using CoreModule.Facade.Order;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,6 @@ public class CoreModuleFacadeBootstrapper
         services.AddScoped<ITeacherFacade, TeacherFacade>();
         services.AddScoped<ICourseCategoryFacade, CourseCategoryFacade>();
         services.AddScoped<ICourseFacade, CourseFacade>();
+        services.AddScoped<IOrderFacade, OrderFacade>();
     }
 }

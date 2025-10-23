@@ -1,4 +1,5 @@
-﻿using CoreModule.Query._Data.Entities;
+﻿using CoreModule.Domain.Order.Models;
+using CoreModule.Query._Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ public class QueryContext : DbContext
     public DbSet<SectionQueryModel> Sections { get; set; }
     public DbSet<EpisodeQueryModel> Episodes { get; set; }
     public DbSet<CategoryQueryModel> CourseCategories { get; set; }
+    public DbSet<OrderQueryModel> Orders { get; set; }
+    public DbSet<OrderItemQueryModel> OrderItems { get; set; }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
@@ -43,7 +46,11 @@ public class QueryContext : DbContext
                 .IsUnicode(false)
                 .HasMaxLength(20);
         });
+        modelBuilder.Entity<OrderItemQueryModel>(builder =>
+        {
+            builder.ToTable("OrderItems");
 
+        });
         modelBuilder.Entity<CourseQueryModel>(builder =>
         {
             builder.OwnsOne(b => b.SeoData, config =>
