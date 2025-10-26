@@ -1,6 +1,7 @@
 ﻿using Common.Infrastructure;
 using CoreModule.Domain.Category.Models;
 using CoreModule.Domain.Course.Models;
+using CoreModule.Domain.HelperEntities;
 using CoreModule.Domain.Order.Models;
 using CoreModule.Domain.Teacher.Models;
 using CoreModule.Infrastucture.Persistent.Course;
@@ -26,6 +27,7 @@ public class CoreMoudelEfContext : BaseEfContext<CoreMoudelEfContext>
     public DbSet<CourseCategory> Categories { get; set; }
     public DbSet<Domain.Order.Models.Order> Orders { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<CourseStudent> CourseStudents { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

@@ -60,6 +60,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Comment", "Comment", "{020A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommentModules", "src\Modules\Comment\CommentModules\CommentModules.csproj", "{A8DFE17C-5E70-47C5-AC77-64858CF2F79D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transaction", "Transaction", "{56363E0D-CCC0-4D8F-867B-1E5EF734B730}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransactionModule", "src\Modules\Transaction\TransactionModule\TransactionModule.csproj", "{4A7EC9EC-C466-4798-9535-596982BC2B4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -134,6 +138,10 @@ Global
 		{A8DFE17C-5E70-47C5-AC77-64858CF2F79D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8DFE17C-5E70-47C5-AC77-64858CF2F79D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8DFE17C-5E70-47C5-AC77-64858CF2F79D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A7EC9EC-C466-4798-9535-596982BC2B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A7EC9EC-C466-4798-9535-596982BC2B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A7EC9EC-C466-4798-9535-596982BC2B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A7EC9EC-C466-4798-9535-596982BC2B4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -164,6 +172,8 @@ Global
 		{99F8CB15-339C-4EC8-BE53-CCE1AE959FD5} = {DEE43A5D-5EC8-4123-B321-3A3C232A9CAE}
 		{020A0C38-0F2D-4768-B142-FAAEBB6E83E3} = {ABFAB972-6549-433D-AA92-D4D3FD40EB99}
 		{A8DFE17C-5E70-47C5-AC77-64858CF2F79D} = {020A0C38-0F2D-4768-B142-FAAEBB6E83E3}
+		{56363E0D-CCC0-4D8F-867B-1E5EF734B730} = {ABFAB972-6549-433D-AA92-D4D3FD40EB99}
+		{4A7EC9EC-C466-4798-9535-596982BC2B4C} = {56363E0D-CCC0-4D8F-867B-1E5EF734B730}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A5E055AB-8E23-4E1F-BB83-698DB3C84F05}
